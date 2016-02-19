@@ -15,50 +15,36 @@ namespace KristofL\PHPProject\Entities;
  * @author kristof.liesenborghs
  */
 class Bestellijn {
-    
-    private static $idMap = array(); 
-    
-    private $bestellijnId; 
-    private $bestelling; // = obj. Bestelling 
-    private $product; // = obj. Product
+     
+    private $bestellingId;  
+    private $productId; 
     private $hoeveelheid; 
     
-    private function __construct($bestellijnId, $bestelling, $product, $hoeveelheid) {     
-        $this->bestellijnId = $bestellijnId; 
-        $this->bestelling = $bestelling;
-        $this->product = $product;
+    public function __construct($bestellingId, $productId, $hoeveelheid) {     
+        $this->bestellingId = $bestellingId;
+        $this->productId = $productId;
         $this->hoeveelheid = $hoeveelheid;
     }
     
-    public static function create($bestellijnId, $bestelling, $product, $hoeveelheid) {
-        if (!isset(self::$idMap[$bestellijnId])) {
-            self::$idMap[$bestellijnId] = new Bestellijn($bestellijnId, $bestelling, $product, $hoeveelheid);
-        }
-        return self::$idMap[$bestellijnId]; 
-    }
     
-    function getBestellijnId() {
-        return $this->bestellijnId;
+    function getBestellingId() {
+        return $this->bestellingId;
     }
 
-    function getBestelling() {
-        return $this->bestelling;
-    }
-
-    function getProduct() {
-        return $this->product;
+    function getProductId() {
+        return $this->productId;
     }
 
     function getHoeveelheid() {
         return $this->hoeveelheid;
     }
     
-    function setBestelling($bestelling) {
-        $this->bestelling = $bestelling;
+    function setBestellingId($bestellingId) {
+        $this->bestellingId = $bestellingId;
     }
 
-    function setProduct($product) {
-        $this->product = $product;
+    function setProductId($productId) {
+        $this->productId = $productId;
     }
 
     function setHoeveelheid($hoeveelheid) {
