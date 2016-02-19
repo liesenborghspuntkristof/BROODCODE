@@ -22,7 +22,7 @@ use PDO;
 class KlantDAO {
 
     public function getAll() {
-        $sql = "SELECT e-mailadres, wachtwoord, voornaam, familienaam, adres, klanten.postID as woonplaats, zipcode, naam, geblokkeerd FROM klanten, woonplaatsen WHERE klanten.postID = woonplaatsen.postID";
+        $sql = "SELECT emailadres, wachtwoord, voornaam, familienaam, adres, klanten.postID as woonplaats, zipcode, naam, geblokkeerd FROM klanten, woonplaatsen WHERE klanten.postID = woonplaatsen.postID";
         var_dump($sql); 
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $resultSet = $dbh->query($sql); 
