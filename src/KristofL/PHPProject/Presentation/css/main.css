@@ -8,3 +8,523 @@ and open the template in the editor.
     Author     : kristof.liesenborghs
 */
 
+/*
+    #533E29     -> BROWN;
+    #3B5450     -> 'PETROL'; 
+    #E30304     -> RED; 
+    #FAFFAD     -> YELLOW/BEIGE; 
+    #7F9799     -> GREY/BLUE; 
+*/
+
+@charset "utf-8";
+@font-face {
+    font-family: 'detourdork'; 
+    src: url('../fonts/detourdork/ddorktrial-webfont.eot');
+    src: url('../fonts/detourdork/ddorktrial-webfont.eot?#iefix') format('embedded-opentype'), 
+        url('../fonts/detourdork/ddorktrial-webfont.woff2') format('woff2'),
+        url('../fonts/detourdork/ddorktrial-webfont.woff') format('woff'),
+        url('../fonts/detourdork/ddorktrial-webfont.ttf') format('truetype'),
+        url('../fonts/detourdork/ddorktrial-webfont.svg#detourdork') format('svg');     
+}
+@font-face {
+    font-family: 'woodcutterbarcode'; 
+    src: url('../fonts/woodcutter/Woodcutter barcode.ttf') format('truetype');
+}
+
+
+
+/* framework CDN *//* example bootstrap, foundation, ec */
+
+/*********** grid *******************/
+* {
+    box-sizing:border-box;
+}    
+.rij:after {
+    content: "";
+    clear: both;
+    display: block;
+}   
+[class*="kol-"] {
+    float: left;
+    padding: 10px;
+    /*outline: red solid 1px;*/
+}
+
+/***** css only fluid width equal height columns **/
+
+#zeecontainer {
+    margin:0; 
+    position:relative;    
+}
+
+.kolom {
+    position:relative; 
+    float:left; 
+    width:31%;   /* 31% = 3 kolommen */
+    margin:5em 1%;  
+    padding:0.5em; 
+}
+
+.achtergrond {
+    position:absolute;
+    width:100%;
+    height:100%;
+
+}
+
+.achtergrond .kolom {
+    height: 100%;
+    background-color:#7F9799 ; 
+}
+
+.wis {
+    clear: both;
+}
+/**** opbouw css only fluid width equal height columns 
+<div id="zeecontainer">
+            <div class="achtergrond"> = kleur
+                <div class="kolom"></div> =lege div
+                <div class="kolom"></div> =lege div
+                <div class="kolom"></div> =lege div
+            </div>
+                <div class="kolom"><p>Deze opleidingen worden gegeven als "begeleide zelfstudie": je leert al doende en wordt toch ter plekke begeleidt door de instructeur. De dot module beschrijft wat er van je verlangt wordt en hoe je dat kunt bereiken</p></div>
+                 <div class="kolom"><p>Je gebruikt vdab cursussen, leest Engelstalige IT boeken en websites om het onderwerp te studeren</p></div> 
+                <div class="kolom"><p>De opleiding bestaat uit modules: voor elke module volg je een dot brochure die zegt wat, hoe en enlang je erover doet</p>
+            </div>
+            <div class="wis"></div>
+</div>
+                                            einde opbouw **/        
+/********** einde zeecontainer ********/
+
+/********** algemeen ************/
+
+.redpetrol {
+    color: #E30304; 
+    text-shadow: 2px 2px #3B5450;
+    font-family: detourdork; 
+}
+
+.redyellow {
+    color: #E30304; 
+    text-shadow: 2px 2px #FAFFAD;
+    font-family: detourdork;
+}
+
+
+
+
+
+/************ mobile first **********/
+
+/**** responsive switches ***/
+.sm_on {display: none;}
+.md_on {display: none;}
+.lg_on {display: none;}
+.xl_on {display: none;}
+.xxl_on {display: none;}
+
+.xs_on {display: block;}
+/*****        end        ****/
+
+[class*="kol-"] {
+    width: 100%;
+}
+
+
+
+html {
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0; 
+    font-family: sans-serif; 
+    position: relative; 
+}
+
+a.LP {
+    display: block;
+    text-decoration: none;
+    width: 100vw; 
+    height: 5em;   
+}
+
+span.fixed {
+    display: inline-block;  
+    font-family: detourdork, sans-serif; 
+    font-size: 1.5em; 
+    margin-top: calc(5em/2 - 1.5em); 
+}
+
+header.midden, footer.midden {
+    text-align: center;
+}
+
+header.midden, footer.midden {
+    text-align: center;
+}
+
+header {
+    display: block; 
+    position: fixed; 
+    top: 0; 
+    width: 100vw; 
+    height: 5em;    
+    background-color: #7F9799; 
+    font-family: ddork; 
+}
+
+#topPijl {
+    position: fixed; 
+    top: 5em;
+    left: calc(50% - 20px);  
+    right: calc(50% - 20px);  
+    border-top: 20px solid #7F9799; 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent;
+    width: 0;
+    height: 0;
+
+}
+
+#logoLP {
+    display: block; 
+    position: fixed; 
+    margin: 0; 
+    top: 110px; 
+    bottom: auto; 
+    left: 10%;
+    right: 10%; 
+    font-family: woodcutterbarcode; 
+    font-size: 15vh; 
+
+}
+
+#logo {
+    display: inline-block;   
+    margin-top: 0.5em;
+    margin-left: 0.5em; 
+    height: 4em; 
+    width: 40vw; 
+    overflow: hidden; 
+    position: relative; 
+}
+
+#logo span {
+    font-family: woodcutterbarcode; 
+    font-size: 10em;
+    bottom: 0; 
+    position: absolute; 
+}
+
+#broodlift {
+    margin-top: 5em; 
+    height: calc(100vmin - 10em - 20px);  
+    text-align: center; 
+    display: block; 
+    /*    background-image: url("../img/automaat3.jpg"); 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        background-size: 75%; */
+    position: relative; 
+}
+
+#automaat {
+    width: 95vmin; 
+    margin-top: 20vmin;
+}
+
+
+#sloganLP {
+    display: block; 
+    position: fixed; 
+    bottom: 120px; 
+    left: 10%; 
+    right: 10%; 
+    font-family: detourdork; 
+    font-size: 5vh; 
+
+}
+
+#slogan { 
+    float: left; 
+    font-family: detourdork; 
+    font-size: 2em; 
+    margin-top: calc(5em/2 - 1.55em); 
+    margin-left: 0.5em; 
+}
+
+
+#bodemPijl {
+    position: fixed; 
+    bottom: 5em;
+    left: calc(50% - 20px); 
+    right: calc(50% - 20px);      
+    border-bottom: 20px solid #7F9799; 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent;
+    width: 0;
+    height: 0;
+}
+
+footer {
+    display: block; 
+    position: fixed; 
+    bottom: 0; 
+    width: 100vw; 
+    height: 5em; 
+    background-color: #7F9799;
+}
+
+#orderButton {
+    float: right;
+    display: block; 
+    height: 5em; 
+    width: 40vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1.5em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center;
+}
+
+#orderButton span {
+    display: inline-block; 
+    margin-top: calc(5em/2 - 1.25em);
+}
+
+
+#infoButton {
+    float: right;
+    display: block; 
+    height: 5em; 
+    width: 40vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1.5em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center; 
+}
+
+#infoButton span {
+    display: inline-block; 
+    margin-top: calc(5em/2 - 1.25em); 
+}
+
+input:focus {background-color: #FAFFAD ;}
+
+#login { 
+    text-align: right;
+}
+
+#login input {
+    width: 10em;
+    text-align: center;
+    padding: 0.2em 0.5em; 
+}
+
+#login input[type="submit"] {
+    border-radius: 0.2em; 
+    border: 1px outset #3B5450 ;
+    background-color: #E30304;
+    color: #FAFFAD;
+    font-weight: bold;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#nieuw {
+/*    border: 1px solid black;*/
+    display: block;
+    float: right; 
+    width: 40vw;
+    margin: 8em auto;
+    color: #585858; 
+}
+
+#nieuw input, #nieuw select {
+    display: block;
+    margin: 1em auto;
+    width: 30em;
+    text-align: center;
+    padding: 0.5em;
+    color: #585858;
+}
+
+#nieuw input[type="submit"] {
+    border-radius: 0.2em; 
+    border: 1px outset #533E29;
+    background-color: #7F9799;
+    width: 31em;
+    font-weight: bold;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+
+/*********** phablet ***********//* sm (small)=@media screen and (min-width:361px) */
+@media screen and (min-width:405px){
+
+    /**** responsive switches ***/
+    .xs_on {display: none;}
+    .md_on {display: none;}
+    .lg_on {display: none;}
+    .xl_on {display: none;}
+    .xxl_on {display: none;}
+
+    .sm_on {display: block;}
+    /*****        end        ****/
+
+    .kol-sm-1 {width: 8.33%;}
+    .kol-sm-2 {width: 16.66%;}
+    .kol-sm-3 {width: 25%;}
+    .kol-sm-4 {width: 33.33%;}
+    .kol-sm-5 {width: 41.66%;}
+    .kol-sm-6 {width: 50%;}
+    .kol-sm-7 {width: 58.33%;}
+    .kol-sm-8 {width: 66.66%;}
+    .kol-sm-9 {width: 75%;}
+    .kol-sm-10 {width: 83.33%;}
+    .kol-sm-11 {width: 91.66%;}
+    .kol-sm-12 {width: 100%;}
+
+}
+
+/*********** tablet ***********//* md (medium)=@media screen and (min-width:599px) */
+
+@media screen and (min-width:599px){
+
+    /**** responsive switches ***/
+    .xs_on {display: none;}
+    .sm_on {display: none;}
+    .lg_on {display: none;}
+    .xl_on {display: none;}
+    .xxl_on {display: none;}
+
+    .md_on {display: block;}
+    /*****        end        ****/
+
+    .kol-md-1 {width: 8.33%;}
+    .kol-md-2 {width: 16.66%;}
+    .kol-md-3 {width: 25%;}
+    .kol-md-4 {width: 33.33%;}
+    .kol-md-5 {width: 41.66%;}
+    .kol-md-6 {width: 50%;}
+    .kol-md-7 {width: 58.33%;}
+    .kol-md-8 {width: 66.66%;}
+    .kol-md-9 {width: 75%;}
+    .kol-md-10 {width: 83.33%;}
+    .kol-md-11 {width: 91.66%;}
+    .kol-md-12 {width: 100%;}
+
+
+}
+
+
+
+/*********** desktopke ***********//* lg (large)=@media screen and (min-width:799px) */
+@media screen and (min-width:799px) {
+
+    /**** responsive switches ***/
+    .xs_on {display: none;}
+    .sm_on {display: none;}
+    .md_on {display: none;}
+    .xl_on {display: none;}
+    .xxl_on {display: none;}
+
+    .lg_on {display: block;}
+    /*****        end        ****/
+
+    .kol-lg-1 {width: 8.33%;}
+    .kol-lg-2 {width: 16.66%;}
+    .kol-lg-3 {width: 25%;}
+    .kol-lg-4 {width: 33.33%;}
+    .kol-lg-5 {width: 41.66%;}
+    .kol-lg-6 {width: 50%;}
+    .kol-lg-7 {width: 58.33%;}
+    .kol-lg-8 {width: 66.66%;}
+    .kol-lg-9 {width: 75%;}
+    .kol-lg-10 {width: 83.33%;}
+    .kol-lg-11 {width: 91.66%;}
+    .kol-lg-12 {width: 100%;}  
+
+
+}
+
+/*********** desktop ***********//* xl (extra large)=@media screen and (min-width:1001px) */
+@media screen and (min-width:1001px) {
+
+    /**** responsive switches ***/
+    .xs_on {display: none;}
+    .sm_on {display: none;}
+    .md_on {display: none;}
+    .lg_on {display: none;}
+    .xxl_on {display: none;}
+
+    .xl_on {display: block;}
+    /*****        end        ****/
+
+    .kol-xl-1 {width: 8.33%;}
+    .kol-xl-2 {width: 16.66%;}
+    .kol-xl-3 {width: 25%;}
+    .kol-xl-4 {width: 33.33%;}
+    .kol-xl-5 {width: 41.66%;}
+    .kol-xl-6 {width: 50%;}
+    .kol-xl-7 {width: 58.33%;}
+    .kol-xl-8 {width: 66.66%;}
+    .kol-xl-9 {width: 75%;}
+    .kol-xl-10 {width: 83.33%;}
+    .kol-xl-11 {width: 91.66%;}
+    .kol-xl-12 {width: 100%;}
+
+
+}
+
+/*********** breedbeeld ***********//* xxl (extra extra large)=@media screen and (min-width:1432px) */
+@media screen and (min-width:1432px) {
+
+    /**** responsive switches ***/
+    .xs_on {display: none;}
+    .sm_on {display: none;}
+    .md_on {display: none;}
+    .lg_on {display: none;}
+    .xl_on {display: none;}
+
+    .xxl_on {display: block;}
+    /*****        end        ****/
+
+    .kol-xxl-1 {width: 8.33%;}
+    .kol-xxl-2 {width: 16.66%;}
+    .kol-xxl-3 {width: 25%;}
+    .kol-xxl-4 {width: 33.33%;}
+    .kol-xxl-5 {width: 41.66%;}
+    .kol-xxl-6 {width: 50%;}
+    .kol-xxl-7 {width: 58.33%;}
+    .kol-xxl-8 {width: 66.66%;}
+    .kol-xxl-9 {width: 75%;}
+    .kol-xxl-10 {width: 83.33%;}
+    .kol-xxl-11 {width: 91.66%;}
+    .kol-xxl-12 {width: 100%;}
+
+
+}
+
+/**@media print {}**/
+
+/*****flex + clearfix*****/
+
+/* clear */
+.cf{clear:both;}
+/*clearfix hack*/
+
+.clearFix:before, .clearFix:after{
+    content: " ";
+    display: table;
+}
+.clearFix:after{
+    clear:both;
+}
+/*enkel voor IE6/7 */
+.clearFix{
+    *zoom: 1;
+}
