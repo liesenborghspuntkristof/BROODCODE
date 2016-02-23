@@ -21,7 +21,7 @@ use PDO;
 class WoonplaatsDAO {
     
     public function getAll() {
-        $sql = "SELECT postID, zipcode, naam FROM woonplaatsen";
+        $sql = "SELECT postID, zipcode, naam FROM woonplaatsen ORDER BY naam ASC";
         
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $resultSet = $dbh->query($sql); 
