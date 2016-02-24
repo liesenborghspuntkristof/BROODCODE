@@ -20,14 +20,16 @@ and open the template in the editor.
     <body>
         <header>
             <a href="index.php" id="logo"><span class="redyellow">BroodCode</span></a>
-                    <div id="orderButton"><div>
-                            <form id="login" method="post" action="login.php?action=login">
-                                <input type="email" placeholder="emailadres" required="" name="emailadres" value="<?php echo $emailadres; ?>">
-                                <input type="password" placeholder="wachtwoord" required="" autofocus="" name="wachtwoord">
-                                <input type="submit" value="aanmelden">
-                            </form>
-                            <span id="loginmsg"><?php echo $loginmsg; ?></span>
-                </div></div>
-            
+            <div id="orderButton">
+                <div>
+                    <form id="login" method="post" action="login.php?action=login">
+                        <input type="email" placeholder="emailadres" required="" name="emailadres" value="<?php echo $emailadres; ?>">
+                        <input type="password" placeholder="wachtwoord" required="" autofocus="" name="wachtwoord">
+                        <input type="submit" value="aanmelden">
+                    </form>
+                    <span id="loginmsg"><?php echo $loginmsg; ?></span>
+                </div>
+            </div>
+
         </header>
         <div id="topPijl"></div>

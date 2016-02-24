@@ -82,4 +82,18 @@ echo $secret . "</br>";
 $desecret = base64_decode($secret); 
  echo $desecret . "</br>";
 
-$test = " J"; 
+$test = "       ";
+var_dump($test); 
+var_dump(noSpace($test)); 
+
+$check = array(); 
+array_push($check, TRUE);
+array_push($check, TRUE); 
+array_push($check, TRUE); 
+array_push($check, TRUE); 
+$strict = TRUE; 
+var_dump(array_search(FALSE, $check, $strict));
+
+var_dump($check); 
+
+echo "<pre>" . passwordGenerator() . "</pre>"; 

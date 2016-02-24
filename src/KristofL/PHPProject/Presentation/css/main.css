@@ -366,6 +366,8 @@ input:focus {background-color: #FAFFAD ;}
     -moz-box-sizing: border-box;
 }
 
+#nieuw select option:first-child{opacity: 0.7; color: red;}
+
 #vitrine {
     float: left; 
     width: 50vw; 

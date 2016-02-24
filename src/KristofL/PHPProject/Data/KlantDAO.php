@@ -50,5 +50,14 @@ class KlantDAO {
         $dbh = null; 
         return $klant; 
     }
+    
+    public function registerNieuweKlant($emailadres, $wachtwoord, $voornaam, $familienaam, $adres, $postId) {
+        $sql = "INSERT INTO klanten(emailadres, wachtwoord, voornaam, familienaam, adres, postID) VALUES (:emailadres, :wachtwoord, :voornaam, :familienaam, :adres, :postID)";
+//        var_dump($sql); 
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql); 
+        $stmt->execute(array(':emailadres' => $emailadres, ':wachtwoord' => $wachtwoord, ':voornaam' => $voornaam, ':familienaam' => $familienaam, ':adres' => $adres, ':postID' => $postId)); 
+        $dbh = null;  
+    }
 
 }

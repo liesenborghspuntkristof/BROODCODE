@@ -161,8 +161,4 @@ function check_password($string) {
     return $passwordCheck;
 }
 
-function noSpace($string) {
-    $spaceless = str_replace(" ", "", $string);
-    $valid = string_to_ascii($spaceless);  
-    return $spaceless;
-}
+

@@ -11,6 +11,7 @@ namespace KristofL\PHPProject\Presentation;
     <input type="text" placeholder="familienaam" name="familienaam" required="">
     <input type="text" placeholder="straatnaam + huisnummer" name="adres" required="">
     <select name="woonplaats">
+        <option>woonplaats [zipcode]</option>
         <?php
         foreach ($woonplaatslijst as $woonplaats) {
             ?>
@@ -21,3 +22,7 @@ namespace KristofL\PHPProject\Presentation;
     </select>
     <input type="submit" value="registreren">
 </form>
+
+<div id="loginmsg">
+    <?php echo $Regmsg; ?>
+</div>
