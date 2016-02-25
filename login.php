@@ -25,6 +25,29 @@ if (isset($_SESSION["emailadres"])) {
 } else {
     $emailadres = "";
 }
+if (isset($_SESSION["voornaam"])) {
+    $voornaam = $_SESSION["voornaam"]; 
+} else {
+    $voornaam = ""; 
+}
+
+if (isset($_SESSION["familienaam"])) {
+    $familienaam = $_SESSION["familienaam"]; 
+} else {
+    $familienaam = ""; 
+}
+
+if (isset($_SESSION["adres"])) {
+    $adres = $_SESSION["adres"]; 
+} else {
+    $adres = ""; 
+}
+
+if (isset($_SESSION["postId"])) {
+    $postId = $_SESSION["postId"]; 
+} else {
+    $postId = ""; 
+}
 
 if (isset($_GET["action"]) && $_GET["action"] == "login") {
     if (filter_var($_POST["emailadres"], FILTER_VALIDATE_EMAIL) && valid_length($_POST["emailadres"], 6, 100) && check_password($_POST["wachtwoord"])) {
@@ -76,8 +99,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "new") {
     } else {
         $valid["adres"] = FALSE;
     }
-    if (check_valid_input($_POST["postId"], 1, 11) && check_only_numbers($_POST["adres"])) {
-        $_SESSION["adres"] = $_POST["adres"];
+    if (check_valid_input($_POST["postId"], 1, 11) && check_only_numbers($_POST["postId"])) {
+        $_SESSION["postId"] = $_POST["postid"];
         $valid["postId"] = TRUE;
     } else {
         $valid["postId"] = FALSE;
