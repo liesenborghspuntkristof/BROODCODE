@@ -381,6 +381,15 @@ input:focus {background-color: #FAFFAD ;}
     font-size: 1em; 
 }
 
+#Regmsg {
+    color: #E30304; 
+    float: left;
+    width: 40vw; 
+    text-align: center;   
+    font-family: sans-serif;
+    font-size: 1em; 
+}
+
 /*********** phablet ***********//* sm (small)=@media screen and (min-width:361px) */
 @media screen and (min-width:405px){
 

@@ -80,30 +80,35 @@ if (isset($_GET["action"]) && $_GET["action"] == "new") {
         $valid["emailadres"] = TRUE;
     } else {
         $valid["emailadres"] = FALSE;
+        unset($_SESSION["emailadres"]); 
     }
     if (check_valid_input(noSpace($_POST["voornaam"]), 1, 100) && check_no_numbers($_POST["voornaam"])) {
         $_SESSION["voornaam"] = $_POST["voornaam"];
         $valid["voornaam"] = TRUE;
     } else {
         $valid["voornaam"] = FALSE;
+        unset($_SESSION["voornaam"]); 
     }
     if (check_valid_input(noSpace($_POST["familienaam"]), 1, 100) && check_no_numbers($_POST["familienaam"])) {
         $_SESSION["familienaam"] = $_POST["familienaam"];
         $valid["familienaam"] = TRUE;
     } else {
         $valid["familienaam"] = FALSE;
+        unset($_SESSION["familienaam"]); 
     }
     if (check_valid_input(noSpace($_POST["adres"]), 1, 100) && check_numbers($_POST["adres"])) {
         $_SESSION["adres"] = $_POST["adres"];
         $valid["adres"] = TRUE;
     } else {
         $valid["adres"] = FALSE;
+        unset($_SESSION["adres"]); 
     }
     if (check_valid_input($_POST["postId"], 1, 11) && check_only_numbers($_POST["postId"])) {
-        $_SESSION["postId"] = $_POST["postid"];
+        $_SESSION["postId"] = $_POST["postId"];
         $valid["postId"] = TRUE;
     } else {
         $valid["postId"] = FALSE;
+        unset($_SESSION["postId"]); 
     }
     $strict = TRUE;
     if (array_search(FALSE, $valid, $strict)) {

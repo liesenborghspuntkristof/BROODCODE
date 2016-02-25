@@ -97,3 +97,7 @@ var_dump(array_search(FALSE, $check, $strict));
 var_dump($check); 
 
 echo "<pre>" . passwordGenerator() . "</pre>"; 
+
+$woord = string_to_ascii("manuël"); 
+var_dump($woord); 
+var_dump (check_valid_input("manuêl", 1, 100)); 

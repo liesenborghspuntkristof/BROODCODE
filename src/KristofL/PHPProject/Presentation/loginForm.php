@@ -23,6 +23,6 @@ namespace KristofL\PHPProject\Presentation;
     <input type="submit" value="registreren">
 </form>
 
-<div id="loginmsg">
+<div id="Regmsg">
     <?php echo $Regmsg; ?>
 </div>
