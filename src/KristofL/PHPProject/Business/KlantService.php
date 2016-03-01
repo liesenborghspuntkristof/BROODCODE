@@ -49,5 +49,11 @@ class KlantService {
             $klantDAO->registerNieuweKlant($emailadres, $wachtwoord, $voornaam, $familienaam, $adres, $postId); 
         }
     }
+    
+    public function getklantgegevens($emailadres) {
+        $klantDAO = new KlantDAO(); 
+        $klant = $klantDAO->getByEmailadres($emailadres); 
+        return $klant; 
+    }
 }
     

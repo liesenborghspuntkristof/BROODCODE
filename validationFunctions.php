@@ -46,12 +46,6 @@ function check_valid_input($string, $minLength, $maxLength) {
                 case ($ascii >= 97 && $ascii <= 122): //lowerCase letters
                     $valid = TRUE;
                     break;
-                case ($ascii >= 128 && $ascii <= 154): //special char part. 1
-                    $valid = TRUE;
-                    break;
-                case ($ascii >= 160 && $ascii <= 165): //special char part. 2
-                    $valid = TRUE;
-                    break;
                 case $ascii == 35://#
                 case $ascii == 46://.
                 case $ascii == 45://-

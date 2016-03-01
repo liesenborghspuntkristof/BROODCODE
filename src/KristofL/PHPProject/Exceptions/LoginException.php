@@ -1,5 +1,5 @@
 <?php
-//src\KristofL\PHPProject\Exceptions\loginException.php
+//src\KristofL\PHPProject\Exceptions\LoginException.php
 
 namespace KristofL\PHPProject\Exceptions; 
 use Exception; 
@@ -15,7 +15,7 @@ use Exception;
  *
  * @author kristof.liesenborghs
  */
-class loginException extends Exception {
+class LoginException extends Exception {
 
 
 }

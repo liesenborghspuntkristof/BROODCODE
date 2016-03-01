@@ -6,7 +6,7 @@ require_once 'algemeneFuncties.php';
 
 use KristofL\PHPProject\Business\WoonplaatsService;
 use KristofL\PHPProject\Business\KlantService;
-use KristofL\PHPProject\Exceptions\loginException;
+use KristofL\PHPProject\Exceptions\LoginException; 
 use KristofL\PHPProject\Exceptions\NewRegistryException;
 
 /*
@@ -49,7 +49,7 @@ if (isset($_SESSION["postId"])) {
     $postId = ""; 
 }
 
-if (isset($_GET["action"]) && $_GET["action"] == "login") {
+if (isset($_GET["action"]) && $_GET["action"] == "login" && isset($_POST["emailadres"])) {
     if (filter_var($_POST["emailadres"], FILTER_VALIDATE_EMAIL) && valid_length($_POST["emailadres"], 6, 100) && check_password($_POST["wachtwoord"])) {
         $_SESSION["emailadres"] = $_POST["emailadres"];
         try {
@@ -57,6 +57,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "login") {
             $access = $klantSvc->checkLoginByInput($_POST["emailadres"], $_POST["wachtwoord"]);
             if ($access === "granted") {
                 $_SESSION["login"] = "valid login";
+                $_SESSION["emailadres"] = $_POST["emailadres"]; 
                 setcookie("emailadres", $_POST["emailadres"], time() + 43200); //vervalt na 12 uur
                 header('location: winkelwagen.php');
                 exit(0);
@@ -74,7 +75,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "login") {
     }
 }
 
-if (isset($_GET["action"]) && $_GET["action"] == "new") {
+if (isset($_GET["action"]) && $_GET["action"] == "new" && isset($_POST["emailadres"])) {
     if (filter_var($_POST["emailadres"], FILTER_VALIDATE_EMAIL) && valid_length($_POST["emailadres"], 6, 100)) {
         $_SESSION["emailadres"] = $_POST["emailadres"];
         $valid["emailadres"] = TRUE;
@@ -82,21 +83,21 @@ if (isset($_GET["action"]) && $_GET["action"] == "new") {
         $valid["emailadres"] = FALSE;
         unset($_SESSION["emailadres"]); 
     }
-    if (check_valid_input(noSpace($_POST["voornaam"]), 1, 100) && check_no_numbers($_POST["voornaam"])) {
+    if (check_valid_input(noSpace(latin_to_ascii($_POST["voornaam"])), 1, 100) && check_no_numbers($_POST["voornaam"])) {
         $_SESSION["voornaam"] = $_POST["voornaam"];
         $valid["voornaam"] = TRUE;
     } else {
         $valid["voornaam"] = FALSE;
         unset($_SESSION["voornaam"]); 
     }
-    if (check_valid_input(noSpace($_POST["familienaam"]), 1, 100) && check_no_numbers($_POST["familienaam"])) {
+    if (check_valid_input(noSpace(latin_to_ascii($_POST["familienaam"])), 1, 100) && check_no_numbers($_POST["familienaam"])) {
         $_SESSION["familienaam"] = $_POST["familienaam"];
         $valid["familienaam"] = TRUE;
     } else {
         $valid["familienaam"] = FALSE;
         unset($_SESSION["familienaam"]); 
     }
-    if (check_valid_input(noSpace($_POST["adres"]), 1, 100) && check_numbers($_POST["adres"])) {
+    if (check_valid_input(noSpace(latin_to_ascii($_POST["adres"])), 1, 100) && check_numbers($_POST["adres"])) {
         $_SESSION["adres"] = $_POST["adres"];
         $valid["adres"] = TRUE;
     } else {

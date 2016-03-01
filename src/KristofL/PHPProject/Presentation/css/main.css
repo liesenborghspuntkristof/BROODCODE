@@ -110,7 +110,13 @@ and open the template in the editor.
     font-family: detourdork;
 }
 
+.warning {
+    color: #E30304;
+}
 
+.vet {
+    font-weight: bolder;
+}
 
 
 
@@ -141,6 +147,41 @@ body {
     margin: 0; 
     font-family: sans-serif; 
     position: relative; 
+}
+
+#redirect {
+    width: 100vmin; 
+    margin: 2em auto;
+    vertical-align: central; 
+}
+
+#redirect img {
+    width: 40vmin;
+    vertical-align: central; 
+    float: left; 
+}
+
+#linkspijl {  
+    display: inline-block;  
+    border-right: 3vmin solid #7F9799; 
+    border-top: 3vmin solid transparent; 
+    border-bottom: 3vmin solid transparent;
+    width: 0;
+    height: 0;
+    vertical-align: central; 
+    float: left; 
+    margin-top: 45vh; 
+}
+
+#redirect article {
+    display: inline-block; 
+    width: 50vmin;
+    vertical-align: central;
+    background-color: #7F9799; 
+    padding: 1em; 
+    float: left; 
+    margin-top: 15vh; 
+    min-height: 50vh; 
 }
 
 a.LP {
@@ -335,7 +376,7 @@ input:focus {background-color: #FAFFAD ;}
 }
 
 #nieuw {
-/*    border: 1px solid black;*/
+    /*    border: 1px solid black;*/
     display: block;
     float: right; 
     width: 40vw;
@@ -389,6 +430,37 @@ input:focus {background-color: #FAFFAD ;}
     font-family: sans-serif;
     font-size: 1em; 
 }
+
+table.mijnAccount:first-of-type {
+    margin-top: 8em; 
+}
+
+.mijnAccount, .mijnAccount tr, .mijnAccount td {
+    border-collapse: separate; 
+    border: 1px solid black; 
+}
+
+
+.mijnAccount td {padding: 0.5em 2em;}
+.mijnAccount tr td:first-child {width: 30vw;}
+.mijnAccount tfoot td {text-align: right;}
+
+.mijnAccount {
+    margin: 2em auto; 
+    width: 80vw; 
+}
+
+.mijnAccount form input {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0; 
+}
+
+.mijnAccount form input:last-of-type {
+    float: right; 
+    width: 40%;
+}
+
 
 /*********** phablet ***********//* sm (small)=@media screen and (min-width:361px) */
 @media screen and (min-width:405px){
