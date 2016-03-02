@@ -3,6 +3,7 @@
 
 namespace KristofL\PHPProject\Business; 
 use KristofL\PHPProject\Data\WoonplaatsDAO; 
+use KristofL\PHPProject\Exceptions\AccountException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,5 +22,15 @@ class WoonplaatsService {
         $woonplaatsDAO = new WoonplaatsDAO(); 
         $woonplaatslijst = $woonplaatsDAO->getAll(); 
         return $woonplaatslijst;
+    }
+    
+    public function getById($postId) {
+        $woonplaatsDAO = new WoonplaatsDAO(); 
+        $woonplaats = $woonplaatsDAO->getByPostId($postId); 
+        if ($woonplaats->getPostId() == null) {
+            throw new AccountException("Foutieve invoer van woonplaats. Maak opnieuw uw keuze"); 
+        } else {
+            return $woonplaats; 
+        }
     }
 }

@@ -104,7 +104,12 @@ if (isset($_GET["action"]) && $_GET["action"] == "new" && isset($_POST["emailadr
         $valid["adres"] = FALSE;
         unset($_SESSION["adres"]); 
     }
-    if (check_valid_input($_POST["postId"], 1, 11) && check_only_numbers($_POST["postId"])) {
+    try {
+        $woonplaats = $woonplaatsSvc->getById($_POST["postId"]);  
+    } catch (Exception $ex) {
+        $woonplaats == null; 
+    }
+    if (check_valid_input($_POST["postId"], 1, 11) && check_only_numbers($_POST["postId"]) && $woonplaats !== null) {
         $_SESSION["postId"] = $_POST["postId"];
         $valid["postId"] = TRUE;
     } else {
@@ -119,13 +124,14 @@ if (isset($_GET["action"]) && $_GET["action"] == "new" && isset($_POST["emailadr
     } else {
         try {
             $klantSvc = new KlantService();
-            $nieuweKlant = $klantSvc->checkEnStoreNieuweGebruiker($_POST["emailadres"], $_POST["voornaam"], $_POST["familienaam"], $_POST["adres"], $_POST["postId"]);
+            $klantSvc->checkEnStoreNieuweGebruiker($_POST["emailadres"], $_POST["voornaam"], $_POST["familienaam"], $_POST["adres"], $_POST["postId"]);
         } catch (NewRegistryException $ex) {
             $location = "location: login.php?Regmsg=" . base64_encode($ex->getMessage());
             header($location);
             exit(0);
         }
         $_SESSION["login"] = "valid login";
+        setcookie("emailadres", $_SESSION["emailadres"], time() + 43200); //vervalt na 12 uur
         header("location: mijnaccount.php?action=newbie");
         exit(0);
     }
@@ -155,7 +161,10 @@ if (isset($_GET["Regmsg"])) {
     $Regmsg = "";
 }
 
-
+if (isset($_SESSION["emailadres"]) && isset($_SESSION["login"]) && $_SESSION["login"] === "valid login") {
+    header('location:winkelwagen.php'); 
+    exit(0); 
+}
 include 'src/KristofL/PHPProject/Presentation/header_login.php';
 include 'src/KristofL/PHPProject/Presentation/loginForm.php';
 include 'src/KristofL/PHPProject/Presentation/footer.php';

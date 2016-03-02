@@ -450,7 +450,7 @@ table.mijnAccount:first-of-type {
     width: 80vw; 
 }
 
-.mijnAccount form input {
+.mijnAccount form input, .mijnAccount form select {
     display: block;
     width: 100%;
     margin: 0.5em 0; 

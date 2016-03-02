@@ -101,3 +101,9 @@ function passwordGenerator() {
     }
     return $randomPassword;
 }
+
+
+function winkelwagenId($login) {
+    $winkelwagenId = abs(crc32("De winkelwagen van login: " . $login)); 
+    return $winkelwagenId; 
+}

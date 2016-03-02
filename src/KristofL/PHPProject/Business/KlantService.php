@@ -30,11 +30,27 @@ class KlantService {
         if ($klant->getEmailadres() == null) {
             unset($_SESSION["emailadres"]);
             throw new loginException("emailadres staat niet geregistreerd");
-        } elseif ($wachtwoord === $klant->getWachtwoord()) {
+        } 
+        switch (TRUE) {
+    case strlen($klant->getWachtwoord()) == 64:
+        if (passwordEncrypt($klant->getEmailadres(), $wachtwoord) === $klant->getWachtwoord()) {
             $access = "granted";
-        } else {
-            throw new loginException("wachtwoord is niet correct");
         }
+        break;
+    case strlen($klant->getWachtwoord()) !== 64:
+        if ($wachtwoord === $klant->getWachtwoord()) {
+            $access = "granted"; 
+        }
+        break; 
+    default:
+        throw new loginException("wachtwoord is niet correct");
+}       
+//        elseif (strlen($klant->getWachtwoord()) == 64) {
+//            if ($wachtwoord === $klant->getWachtwoord()) {
+//            $access = "granted";
+//        } else {
+//            throw new loginException("wachtwoord is niet correct");
+//        }
         return $access;
     }
 
@@ -54,6 +70,17 @@ class KlantService {
         $klantDAO = new KlantDAO(); 
         $klant = $klantDAO->getByEmailadres($emailadres); 
         return $klant; 
+    }
+    
+    public function encryptEnSetNieuwWachtwoord ($klant, $nieuwWachtwoord) {
+        $encryptedWachtwoord = passwordEncrypt($klant->getEmailadres(), $nieuwWachtwoord); 
+        $klantDAO = new KlantDAO(); 
+        $klantDAO->setNieuwWachtwoord($klant->getEmailadres(), $encryptedWachtwoord); 
+    }
+    
+    public function updateGegevens ($klant) {
+        $klantDAO = new KlantDAO(); 
+        $klantDAO->updateKlantengegevens($klant); 
     }
 }
     

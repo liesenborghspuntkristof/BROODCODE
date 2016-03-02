@@ -68,5 +68,18 @@ class BestellingDAO {
         $dbh = null;
         return $lijst;
     }
+    
+    public function getByDateFromId($emailadres, $datum) {
+        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald FROM bestellingen WHERE emailadres = :emailadres AND afhaaldatum = :datum"; 
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(array(':emailadres' => $emailadres, ':datum' => $datum));
+        $rij = $stmt->fetch(PDO::FETCH_ASSOC); 
+        $klantDAO = new KlantDAO();
+        $klant = $klantDAO->getByEmailadres($emailadres);
+        $bestelling = Bestelling::create($rij["bestellingID"], $datum, $klant, $rij["afgehaald"]);  
+        $dbh = null; 
+        return $bestelling;
+    }
 
 }

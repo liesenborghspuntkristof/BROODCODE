@@ -193,3 +193,9 @@ var_dump(check_valid_input("manuêl", 1, 100));
 //}
 //asort($latinchars); 
 //var_dump($latinchars); 
+echo date_default_timezone_get() . "</br>"; 
+date_default_timezone_set("Europe/Brussels"); 
+echo date("Y-m-d", strtotime("today")) . "</br>"; 
+echo date("Y-m-d", strtotime('+1 day')) . "</br>"; 
+echo date("Y-m-d", strtotime('+2 days')) . "</br>"; 
+echo winkelwagenId("liesenborghs.kristof@gmail.com"); 

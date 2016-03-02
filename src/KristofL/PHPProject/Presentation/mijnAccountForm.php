@@ -1,7 +1,7 @@
-<?php 
+<?php
 //src/KristofL/PHPProject/Presentation/mijnAccountForm.php
 
-namespace KristofL\PHPProject\Presentation; 
+namespace KristofL\PHPProject\Presentation;
 ?>
 <table class="mijnAccount">
     <thead>
@@ -11,7 +11,11 @@ namespace KristofL\PHPProject\Presentation;
     </thead>
     <tbody>
         <tr>
-            <td>
+            <td>Login: </td>
+            <td><?php echo $klant->getEmailadres(); ?></td>
+        </tr>
+        <tr>
+            <td colspan="2">
                 <form action="mijnaccount.php?action=newpwd" method="post">
                     Nieuw wachtwoord: <input type="password" name="wachtwoord" placeholder="min. 8, max. 40 karakters lang / min. 1 hoofdletter / min. 1 cijfer / geen speciale tekens buiten @ . # - _" required="" autofocus="">
                     Bevestig wachtwoord: <input type="password" name="wachtwoordConf" placeholder="Bevestig je nieuw wachtwoord door het te herhalen" required="">
@@ -19,7 +23,13 @@ namespace KristofL\PHPProject\Presentation;
                 </form>
             </td>
         </tr>
+        <?php  if (isset($_GET["pwdmsg"])) { ?>
+        <tr>
+            <td colspan="2" class="warning">
+                <?php echo base64_decode($_GET["pwdmsg"]); ?>
+            </td>
+        </tr>
+        <?php } ?>
     </tbody>
 </table>
 
-   

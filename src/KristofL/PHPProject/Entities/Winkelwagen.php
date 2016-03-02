@@ -43,6 +43,10 @@ class Winkelwagen {
     function getBestellingOverovermorgen() {
         return $this->bestellingOverovermorgen;
     }
+    
+    function setGebruiker($gebruiker) {
+        $this->gebruiker = $gebruiker; 
+    }
 
     function setBestellingMorgen($bestellingMorgen) {
         $this->bestellingMorgen = $bestellingMorgen;

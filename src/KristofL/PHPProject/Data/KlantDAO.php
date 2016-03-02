@@ -59,5 +59,21 @@ class KlantDAO {
         $stmt->execute(array(':emailadres' => $emailadres, ':wachtwoord' => $wachtwoord, ':voornaam' => $voornaam, ':familienaam' => $familienaam, ':adres' => $adres, ':postID' => $postId)); 
         $dbh = null;  
     }
+    
+    public function setNieuwWachtwoord($emailadres, $encryptedWachtwoord) {
+        $sql = "UPDATE klanten SET wachtwoord = :wachtwoord WHERE emailadres = :emailadres";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql); 
+        $stmt->execute(array(':emailadres' => $emailadres, ':wachtwoord' => $encryptedWachtwoord)); 
+        $dbh = null;
+    }
+    
+    public function updateKlantengegevens ($klant) {
+        $sql = "UPDATE klanten SET voornaam = :voornaam, familienaam = :familienaam, adres = :adres, postID = :postID WHERE emailadres = :emailadres";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql); 
+        $stmt->execute(array(':emailadres' => $klant->getEmailadres(), ':voornaam' => $klant->getVoornaam(), ':familienaam' => $klant->getFamilienaam(), ':adres' => $klant->getAdres(), ':postID' => $klant->getWoonplaats()->getPostId())); 
+        $dbh = null;
+    }
 
 }
