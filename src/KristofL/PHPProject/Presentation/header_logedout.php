@@ -20,7 +20,12 @@ and open the template in the editor.
     <body>
         <header>
             <a href="index.php" id="logo"><span class="redyellow">BroodCode</span></a>
-            <a id="orderButton" href="index.php?GO=login"><span class="redyellow">Plaats een order</span></a>
+            <div id="orderButton">
+                <div>
+                    <a id="orderButton" href="index.php?GO=login"><span class="redyellow">Plaats een order</span></a>
+                </div>
+            </div>
         </header>
         <div id="topPijl"></div>
+
 

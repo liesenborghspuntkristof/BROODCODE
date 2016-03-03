@@ -214,6 +214,7 @@ header {
     height: 5em;    
     background-color: #7F9799; 
     font-family: ddork; 
+    z-index: 50; 
 }
 
 #topPijl {
@@ -226,6 +227,7 @@ header {
     border-right: 20px solid transparent;
     width: 0;
     height: 0;
+    z-index: 50; 
 
 }
 
@@ -461,6 +463,34 @@ table.mijnAccount:first-of-type {
     width: 40%;
 }
 
+.centerBox {
+    width: 80vw;
+    margin: 8em auto; 
+    position: relative; 
+    cursor: default; 
+}
+.boxRij {
+    display: block; 
+    width: 100%;
+    border: 1px solid black; 
+}
+.product {
+    display: inline-block; 
+    width: 50%; 
+}
+.prijs, 
+.hoeveelheid {
+    display: inline-block; 
+    width: 20%; 
+}
+
+.product, 
+.prijs,
+.hoeveelheid {
+/*    border: 1px solid black;*/
+    margin: 0; 
+    padding: 0.5em 2em; 
+}
 
 /*********** phablet ***********//* sm (small)=@media screen and (min-width:361px) */
 @media screen and (min-width:405px){

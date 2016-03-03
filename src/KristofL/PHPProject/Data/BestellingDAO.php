@@ -24,7 +24,7 @@ use PDO;
 class BestellingDAO {
 
     public function getAll() {
-        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald FROM bestellingen";
+        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald, referentie FROM bestellingen";
 
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $resultSet = $dbh->query($sql);
@@ -32,7 +32,7 @@ class BestellingDAO {
         $klantDAO = new KlantDAO();
         foreach ($resultSet as $rij) {
             $klant = $klantDAO->getByEmailadres($rij["emailadres"]);
-            $bestelling = Bestelling::create($rij["bestellingID"], $rij["afhaaldatum"], $klant, $rij["afgehaald"]);
+            $bestelling = Bestelling::create($rij["bestellingID"], $rij["afhaaldatum"], $klant, $rij["afgehaald"], $rij["referentie"]);
             array_push($lijst, $bestelling);
         }
         $dbh = null;
@@ -40,7 +40,7 @@ class BestellingDAO {
     }
 
     public function getById($bestellingId) {
-        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald FROM bestellingen WHERE bestellingID = :bestellingID";
+        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald, referentie FROM bestellingen WHERE bestellingID = :bestellingID";
 
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
@@ -48,13 +48,13 @@ class BestellingDAO {
         $rij = $stmt->fetch(PDO::FETCH_ASSOC);
         $klantDAO = new KlantDAO();
         $klant = $klantDAO->getByEmailadres($rij["emailadres"]);
-        $bestelling = Bestelling::create($rij["bestellingID"], $rij["afhaaldatum"], $klant, $rij["afgehaald"]);
+        $bestelling = Bestelling::create($rij["bestellingID"], $rij["afhaaldatum"], $klant, $rij["afgehaald"], $rij["referentie"]);
         $dbh = null;
         return $bestelling;
     }
 
     public function getByKlant($klant) { // = obj. Klant
-        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald FROM bestellingen WHERE emailadres = :emailadres";
+        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald, referentie FROM bestellingen WHERE emailadres = :emailadres";
 
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
@@ -62,7 +62,7 @@ class BestellingDAO {
         $resultSet = $stmt->fetchAll(PDO::FETCH_ASSOC);
         $lijst = array();
         foreach ($resultSet as $rij) {
-            $bestelling = Bestelling::create($rij["bestellingID"], $rij["afhaaldatum"], $klant, $rij["afgehaald"]);
+            $bestelling = Bestelling::create($rij["bestellingID"], $rij["afhaaldatum"], $klant, $rij["afgehaald"], $rij["referentie"]);
             array_push($lijst, $bestelling);
         }
         $dbh = null;
@@ -70,14 +70,14 @@ class BestellingDAO {
     }
     
     public function getByDateFromId($emailadres, $datum) {
-        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald FROM bestellingen WHERE emailadres = :emailadres AND afhaaldatum = :datum"; 
+        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald, referentie FROM bestellingen WHERE emailadres = :emailadres AND afhaaldatum = :datum"; 
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute(array(':emailadres' => $emailadres, ':datum' => $datum));
         $rij = $stmt->fetch(PDO::FETCH_ASSOC); 
         $klantDAO = new KlantDAO();
         $klant = $klantDAO->getByEmailadres($emailadres);
-        $bestelling = Bestelling::create($rij["bestellingID"], $datum, $klant, $rij["afgehaald"]);  
+        $bestelling = Bestelling::create($rij["bestellingID"], $datum, $klant, $rij["afgehaald"], $rij["referentie"]);  
         $dbh = null; 
         return $bestelling;
     }

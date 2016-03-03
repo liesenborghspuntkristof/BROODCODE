@@ -17,12 +17,14 @@ namespace KristofL\PHPProject\Entities;
 class Winkelwagen {
     
     private $gebruiker; // = geëncrypteerd emailadres
+    private $afhalingVandaag; // = obj. bestelling
     private $bestellingMorgen; // = obj. bestelling
     private $bestellingOvermorgen; // = obj. bestelling
     private $bestellingOverovermorgen; // = obj. bestelling
     
-    function __construct($gebruiker, $bestellingMorgen, $bestellingOvermorgen, $bestellingOverovermorgen) {
+    function __construct($gebruiker, $afhalingVandaag, $bestellingMorgen, $bestellingOvermorgen, $bestellingOverovermorgen) {
         $this->gebruiker = $gebruiker;
+        $this->afhalingVandaag = $afhalingVandaag; 
         $this->bestellingMorgen = $bestellingMorgen;
         $this->bestellingOvermorgen = $bestellingOvermorgen;
         $this->bestellingOverovermorgen = $bestellingOverovermorgen;
@@ -30,6 +32,10 @@ class Winkelwagen {
 
     function getGebruiker() {
         return $this->gebruiker;
+    }
+    
+    function getAfhalingVandaag() {
+        return $this->afhalingVandaag; 
     }
 
     function getBestellingMorgen() {
@@ -42,10 +48,6 @@ class Winkelwagen {
 
     function getBestellingOverovermorgen() {
         return $this->bestellingOverovermorgen;
-    }
-    
-    function setGebruiker($gebruiker) {
-        $this->gebruiker = $gebruiker; 
     }
 
     function setBestellingMorgen($bestellingMorgen) {

@@ -198,4 +198,7 @@ date_default_timezone_set("Europe/Brussels");
 echo date("Y-m-d", strtotime("today")) . "</br>"; 
 echo date("Y-m-d", strtotime('+1 day')) . "</br>"; 
 echo date("Y-m-d", strtotime('+2 days')) . "</br>"; 
-echo winkelwagenId("liesenborghs.kristof@gmail.com"); 
+echo winkelwagenId("liesenborghs.kristof@gmail.com") . "</br>"; 
+$time = strtotime("tomorrow"); 
+echo $time . "</br>";
+echo date("Y-m-d", $time); 

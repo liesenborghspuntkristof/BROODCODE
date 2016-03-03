@@ -57,7 +57,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "login" && isset($_POST["emaila
             $access = $klantSvc->checkLoginByInput($_POST["emailadres"], $_POST["wachtwoord"]);
             if ($access === "granted") {
                 $_SESSION["login"] = "valid login";
-                $_SESSION["emailadres"] = $_POST["emailadres"]; 
+                $klant = $klantSvc->getklantgegevens($_SESSION["emailadres"]); 
+                $_SESSION["klant"] = serialize($klant);  
                 setcookie("emailadres", $_POST["emailadres"], time() + 43200); //vervalt na 12 uur
                 header('location: winkelwagen.php');
                 exit(0);
@@ -125,6 +126,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "new" && isset($_POST["emailadr
         try {
             $klantSvc = new KlantService();
             $klantSvc->checkEnStoreNieuweGebruiker($_POST["emailadres"], $_POST["voornaam"], $_POST["familienaam"], $_POST["adres"], $_POST["postId"]);
+            $klant = $klantSvc->getklantgegevens($_POST["emailadres"]);
+            $_SESSION["klant"] = serialize($klant); 
         } catch (NewRegistryException $ex) {
             $location = "location: login.php?Regmsg=" . base64_encode($ex->getMessage());
             header($location);

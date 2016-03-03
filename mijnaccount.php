@@ -14,16 +14,16 @@ use KristofL\PHPProject\Exceptions\AccountException;
  * and open the template in the editor.
  */
 
-if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login") {
+if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset($_SESSION["klant"])) {
     header('location: login.php');
     exit(0);
 } else {
     $klantSvc = new KlantService();
-    if (!isset($_SESSION["klant"])) {     
-        $klant = $klantSvc->getklantgegevens($_SESSION["emailadres"]);         
-    } else {
+//    if (!isset($_SESSION["klant"])) {     
+//        $klant = $klantSvc->getklantgegevens($_SESSION["emailadres"]);         
+//    } else {
         $klant = unserialize($_SESSION["klant"]); 
-    }
+//    }
 
     if (strlen($klant->getWachtwoord()) !== 64) {
         $wachtwoord = $klant->getWachtwoord() . "<span class='warning'>  --wachtwoord is niet beveiligd, wijzig je wachtwoord</span>";

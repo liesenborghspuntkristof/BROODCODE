@@ -19,7 +19,20 @@ and open the template in the editor.
     </head>
     <body>
         <header>
-            <a href="index.php?GO=login"><span class="fixed">Plaats een order</span></a>
+            <a href="index.php" id="logo"><span class="redyellow">BroodCode</span></a>
+            <div id="orderButton">
+                Welkom <?php echo unserialize($_SESSION["klant"])->getVoornaam() . " " . unserialize($_SESSION["klant"])->getFamilienaam(); ?>
+                <a href="mijnaccount.php"><i class="fa fa-user"></i></a>
+                <a href="winkelwagen.php"><i class="fa fa-shopping-cart"></i></a>
+                <a href="mijnbestellingen.php"><i class="fa fa-history"></i></a>
+                <div>
+                    <form id="login" method="post" action="index.php?action=logout">                      
+                        <input type="submit" value="afmelden">
+                    </form>
+<!--                    <span id="loginmsg"><?php echo $loginmsg; ?></span>-->
+                </div>
+            </div>
+
         </header>
         <div id="topPijl"></div>
 

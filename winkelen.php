@@ -3,7 +3,7 @@
 require_once 'bootstrap.php';
 require_once 'algemeneFuncties.php';
 
-use KristofL\PHPProject\Business\BestellingService;
+use KristofL\PHPProject\Business\ProductService;
 
 
 /*
@@ -15,15 +15,20 @@ use KristofL\PHPProject\Business\BestellingService;
 if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset($_SESSION["klant"])) {
     header('location: login.php');
     exit(0);
+} elseif (!isset($_SESSION["winkelwagen"])) {
+    header('location: winkelwagen.php'); 
+    exit(0); 
 } else {
-    $klant = unserialize($_SESSION["klant"]); 
-    $bestellingSvc = new BestellingService();
-    $winkelwagen = $bestellingSvc->createWinkelwagen($klant->getEmailadres()); 
-    $_SESSION["winkelwagen"] = serialize($winkelwagen); 
+    $productSvc = new ProductService(); 
+    $productLijst = $productSvc->getProductList(); 
+//    $klant = unserialize($_SESSION["klant"]);
+//    $winkelwagen = unserialize($_SESSION["winkelwagen"]); 
+//    $bestellingSvc = new BestellingService();
+     
  
 
     require_once 'src/KristofL/PHPProject/Presentation/header_logedin.php';
-    require_once 'src/KristofL/PHPProject/Presentation/winkelwagenPage.php';
+    require_once 'src/KristofL/PHPProject/Presentation/winkelForm.php';
     require_once 'src/KristofL/PHPProject/Presentation/footer.php';
     
 //        var_dump ($winkelwagen);

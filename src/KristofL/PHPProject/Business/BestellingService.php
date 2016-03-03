@@ -24,11 +24,18 @@ class BestellingService {
     public function createWinkelwagen ($emailadres) {
         date_default_timezone_set("Europe/Brussels"); 
         $bestellingDAO = new BestellingDAO(); 
-        $bestellingMorgen = $bestellingDAO->getByDateFromId($emailadres, date("Y-m-d")); 
-        $bestellingOvermorgen = $bestellingDAO->getByDateFromId($emailadres, date("Y-m-d", strtotime('+1 day')));
-        $bestellingOverovermorgen = $bestellingDAO->getByDateFromId($emailadres, date("Y-m-d", strtotime('+2 days')));
-        $winkelwagen = new Winkelwagen (winkelwagenId($_SESSION["emailadres"]), $bestellingMorgen, $bestellingOvermorgen, $bestellingOverovermorgen);
+        $afhalingVandaag = $bestellingDAO->getByDateFromId($emailadres, date("Y-m-d")); 
+        $bestellingMorgen = $bestellingDAO->getByDateFromId($emailadres, date(("Y-m-d"), strtotime('+1 day'))); 
+        $bestellingOvermorgen = $bestellingDAO->getByDateFromId($emailadres, date(("Y-m-d"), strtotime('+2 days')));
+        $bestellingOverovermorgen = $bestellingDAO->getByDateFromId($emailadres, date(("Y-m-d"), strtotime('+3 days')));
+        $winkelwagen = new Winkelwagen (winkelwagenId($_SESSION["emailadres"]), $afhalingVandaag, $bestellingMorgen, $bestellingOvermorgen, $bestellingOverovermorgen);
         return $winkelwagen; 
+    }
+    
+    public function getBestellingenByKlant ($klant) {
+        $bestellingDAO = new BestellingDAO(); 
+        $bestellinglijst = $bestellingDAO->getByKlant($klant); 
+        return $bestellinglijst; 
     }
    
 }
