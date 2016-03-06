@@ -20,7 +20,8 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     exit(0); 
 } else {
     $productSvc = new ProductService(); 
-    $productLijst = $productSvc->getProductList(); 
+    $productlijst = $productSvc->getProductList(); 
+    $categorienaam = $productlijst[0]->getCategorie()->getCategorieNaam(); 
 //    $klant = unserialize($_SESSION["klant"]);
 //    $winkelwagen = unserialize($_SESSION["winkelwagen"]); 
 //    $bestellingSvc = new BestellingService();

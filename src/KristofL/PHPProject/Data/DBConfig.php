@@ -17,7 +17,7 @@ namespace KristofL\PHPProject\Data;
 class DBConfig {
     
     public static $DB_CONNSTRING = "mysql:host=localhost; dbname=broodcode; charset=utf8"; 
-    public static $DB_USERNAME = "BakkerCode"; 
-    public static $DB_PASSWORD = "broodnodig"; 
+    public static $DB_USERNAME = "root"; 
+    public static $DB_PASSWORD = ""; 
     
 }

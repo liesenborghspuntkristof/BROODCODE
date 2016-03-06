@@ -21,18 +21,20 @@ class Product {
     private $productId; 
     private $productNaam; 
     private $productOmschrijving; 
-    private $productPrijs; 
+    private $productPrijs;
+    private $categorie; // = obj. v. Categorie
     
-    private function __construct($productId, $productNaam, $productOmschrijving, $productPrijs) {
+    private function __construct($productId, $productNaam, $productOmschrijving, $productPrijs, $categorie) {
         $this->productId = $productId;
         $this->productNaam = $productNaam;
         $this->productOmschrijving = $productOmschrijving;
         $this->productPrijs = $productPrijs;
+        $this->categorie =$categorie; 
     }
     
-    public static function create($productId, $productNaam, $productOmschrijving, $productPrijs) {
+    public static function create($productId, $productNaam, $productOmschrijving, $productPrijs, $categorie) {
         if (!isset(self::$idMap[$productId])) {
-            self::$idMap[$productId] = new Product($productId, $productNaam, $productOmschrijving, $productPrijs); 
+            self::$idMap[$productId] = new Product($productId, $productNaam, $productOmschrijving, $productPrijs, $categorie); 
         }
         return self::$idMap[$productId]; 
     }
@@ -53,6 +55,10 @@ class Product {
         return $this->productPrijs;
     }
     
+    function getCategorie() {
+        return $this->categorie; 
+    }
+    
     function setProductNaam($productNaam) {
         $this->productNaam = $productNaam;
     }
@@ -63,6 +69,10 @@ class Product {
 
     function setProductPrijs($productPrijs) {
         $this->productPrijs = $productPrijs;
+    }
+    
+    function setCategorie($categorie) {
+        $this->categorie = $categorie; 
     }
 
 

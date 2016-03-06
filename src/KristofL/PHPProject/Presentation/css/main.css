@@ -330,11 +330,17 @@ footer {
     border-left: 2px solid white; 
     text-decoration: none; 
     text-align: center;
+    z-index: 50; 
 }
 
 #orderButton div {
     display: inline-block; 
     margin-top: calc(5em/2 - 1em);
+}
+#orderButton a {
+    display: inline;
+    
+    
 }
 
 

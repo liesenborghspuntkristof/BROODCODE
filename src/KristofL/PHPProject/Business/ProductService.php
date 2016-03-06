@@ -5,6 +5,8 @@
 namespace KristofL\PHPProject\Business;
 
 use KristofL\PHPProject\Data\ProductDAO;
+use KristofL\PHPProject\Data\CategorieDAO; 
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,5 +26,20 @@ class ProductService {
         $productlijst = $productDAO->getAll();
         return $productlijst;
     }
-
+    
+//    public function getProductListByCategorieList() {
+//        $productDAO = new ProductDAO(); 
+//        $categorieDAO = new CategorieDAO(); 
+//        $categorielijst = $categorieDAO->getAll();
+//        $lijst = array(); 
+//        foreach ($categorielijst as $categorie) {
+//            $lijstnaam = array($categorie->getCategorieNaam()); 
+//            $productlijst = $productDAO->getByCategorie($categorie); 
+//            $productlistByCategorie = array_fill_keys($lijstnaam, $productlijst);
+//            array_push($lijst, $productlistByCategorie); 
+//        }
+//        return $lijst; 
+//    }
+    
+    
 }

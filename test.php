@@ -5,6 +5,8 @@ use KristofL\PHPProject\Data\WoonplaatsDAO;
 use KristofL\PHPProject\Data\BestellingDAO;
 use KristofL\PHPProject\Data\ProductDAO;
 use KristofL\PHPProject\Data\BestellijnDAO;
+use KristofL\PHPProject\Business\ProductService; 
+use KristofL\PHPProject\Data\CategorieDAO; 
 
 require_once 'bootstrap.php';
 require_once 'validationFunctions.php';
@@ -66,103 +68,103 @@ require_once 'algemeneFuncties.php';
 
 
 
-$adres = "Weg Messelbroek 100";
-echo str_replace(" ", "", $adres);
-echo "<br>";
-$emailadres = "liesenborghs@kristof @gmail.com";
-$wachtwoord = "D00fstom";
-var_dump(check_password($wachtwoord));
-echo "<br>";
-echo filter_var($emailadres, FILTER_VALIDATE_EMAIL);
-$emailadres = filter_var($emailadres, FILTER_SANITIZE_EMAIL);
-echo filter_var($emailadres, FILTER_VALIDATE_EMAIL);
-echo "<br>";
-$msg = "dit is een test, pompoenzaadjes zijn lekker";
-$secret = base64_encode($msg);
-echo $secret . "</br>";
-$desecret = base64_decode($secret);
-echo $desecret . "</br>";
+//$adres = "Weg Messelbroek 100";
+//echo str_replace(" ", "", $adres);
+//echo "<br>";
+//$emailadres = "liesenborghs@kristof @gmail.com";
+//$wachtwoord = "D00fstom";
+//var_dump(check_password($wachtwoord));
+//echo "<br>";
+//echo filter_var($emailadres, FILTER_VALIDATE_EMAIL);
+//$emailadres = filter_var($emailadres, FILTER_SANITIZE_EMAIL);
+//echo filter_var($emailadres, FILTER_VALIDATE_EMAIL);
+//echo "<br>";
+//$msg = "dit is een test, pompoenzaadjes zijn lekker";
+//$secret = base64_encode($msg);
+//echo $secret . "</br>";
+//$desecret = base64_decode($secret);
+//echo $desecret . "</br>";
+//
+//$test = "       ";
+//var_dump($test);
+//var_dump(noSpace($test));
+//
+//$check = array();
+//array_push($check, TRUE);
+//array_push($check, TRUE);
+//array_push($check, TRUE);
+//array_push($check, TRUE);
+//$strict = TRUE;
+//var_dump(array_search(FALSE, $check, $strict));
+//
+//var_dump($check);
 
-$test = "       ";
-var_dump($test);
-var_dump(noSpace($test));
-
-$check = array();
-array_push($check, TRUE);
-array_push($check, TRUE);
-array_push($check, TRUE);
-array_push($check, TRUE);
-$strict = TRUE;
-var_dump(array_search(FALSE, $check, $strict));
-
-var_dump($check);
-
-echo "<pre>" . passwordGenerator() . "</pre>";
-
-$woord = "çéèàëäüöïÄËÜÖÿêîôûâÊÂÛÔÎñÑàáúùúóòíìÉÈÆ"; 
-$latinchar = array (
-    'ë' => "e",
-    'ê' => "e", 
-    'é' => "e", 
-    'è' => "e", 
-    'Ê' => "E", 
-    'Ë' => "E", 
-    'É' => "E", 
-    'È' => "E", 
-    'ç' => "c",
-    'Ç' => "C",
-    'â' => "a", 
-    'ä' => "a", 
-    'á' => "a", 
-    'à' => "a",
-    'ã' => "a",
-    'å' => "a", 
-    'Â' => "A",
-    'Ä' => "A", 
-    'Á' => "A", 
-    'À' => "A",
-    'Ã' => "A", 
-    'ô' => "o", 
-    'ö' => "o", 
-    'ó' => "o", 
-    'ò' => "o", 
-    'õ' => "o", 
-    'Ô' => "O", 
-    'Ö' => "O", 
-    'Ó' => "O", 
-    'Ò' => "O", 
-    'Õ' => "O", 
-    'ñ' => "n", 
-    'Ñ' => "N", 
-    'ÿ' => "y", 
-    'ý' => "y", 
-    'Ý' => "Y",
-    'î' => "i", 
-    'ï' => "i", 
-    'í' => "i", 
-    'ì' => "i",
-    'Î' => "I", 
-    'Ï' => "I", 
-    'Í' => "I", 
-    'Ì' => "I",
-    'û' => "u", 
-    'ü' => "u", 
-    'ú' => "u", 
-    'ù' => "u",
-    'Ü' => "U", 
-    'Û' => "U", 
-    'Ú' => "U", 
-    'Ù' => "U", 
-    'Æ' => "AE", 
-    'æ' => "ae",
-    'ß' => "ss",  
-    ); 
-
-$replacetest = strtr($woord, $latinchar); 
-var_dump($woord, $replacetest); 
-$convert = string_to_ascii($replacetest);
-var_dump($convert);
-var_dump(check_valid_input("manuêl", 1, 100));
+//echo "<pre>" . passwordGenerator() . "</pre>";
+//
+//$woord = "çéèàëäüöïÄËÜÖÿêîôûâÊÂÛÔÎñÑàáúùúóòíìÉÈÆ"; 
+//$latinchar = array (
+//    'ë' => "e",
+//    'ê' => "e", 
+//    'é' => "e", 
+//    'è' => "e", 
+//    'Ê' => "E", 
+//    'Ë' => "E", 
+//    'É' => "E", 
+//    'È' => "E", 
+//    'ç' => "c",
+//    'Ç' => "C",
+//    'â' => "a", 
+//    'ä' => "a", 
+//    'á' => "a", 
+//    'à' => "a",
+//    'ã' => "a",
+//    'å' => "a", 
+//    'Â' => "A",
+//    'Ä' => "A", 
+//    'Á' => "A", 
+//    'À' => "A",
+//    'Ã' => "A", 
+//    'ô' => "o", 
+//    'ö' => "o", 
+//    'ó' => "o", 
+//    'ò' => "o", 
+//    'õ' => "o", 
+//    'Ô' => "O", 
+//    'Ö' => "O", 
+//    'Ó' => "O", 
+//    'Ò' => "O", 
+//    'Õ' => "O", 
+//    'ñ' => "n", 
+//    'Ñ' => "N", 
+//    'ÿ' => "y", 
+//    'ý' => "y", 
+//    'Ý' => "Y",
+//    'î' => "i", 
+//    'ï' => "i", 
+//    'í' => "i", 
+//    'ì' => "i",
+//    'Î' => "I", 
+//    'Ï' => "I", 
+//    'Í' => "I", 
+//    'Ì' => "I",
+//    'û' => "u", 
+//    'ü' => "u", 
+//    'ú' => "u", 
+//    'ù' => "u",
+//    'Ü' => "U", 
+//    'Û' => "U", 
+//    'Ú' => "U", 
+//    'Ù' => "U", 
+//    'Æ' => "AE", 
+//    'æ' => "ae",
+//    'ß' => "ss",  
+//    ); 
+//
+//$replacetest = strtr($woord, $latinchar); 
+//var_dump($woord, $replacetest); 
+//$convert = string_to_ascii($replacetest);
+//var_dump($convert);
+//var_dump(check_valid_input("manuêl", 1, 100));
 
 //function uniord($u) { 
 //    $k = mb_convert_encoding($u, 'UCS-2LE', 'UTF-8'); 
@@ -193,12 +195,26 @@ var_dump(check_valid_input("manuêl", 1, 100));
 //}
 //asort($latinchars); 
 //var_dump($latinchars); 
-echo date_default_timezone_get() . "</br>"; 
-date_default_timezone_set("Europe/Brussels"); 
-echo date("Y-m-d", strtotime("today")) . "</br>"; 
-echo date("Y-m-d", strtotime('+1 day')) . "</br>"; 
-echo date("Y-m-d", strtotime('+2 days')) . "</br>"; 
-echo winkelwagenId("liesenborghs.kristof@gmail.com") . "</br>"; 
-$time = strtotime("tomorrow"); 
-echo $time . "</br>";
-echo date("Y-m-d", $time); 
+//echo date_default_timezone_get() . "</br>"; 
+//date_default_timezone_set("Europe/Brussels"); 
+//echo date("Y-m-d", strtotime("today")) . "</br>"; 
+//echo date("Y-m-d", strtotime('+1 day')) . "</br>"; 
+//echo date("Y-m-d", strtotime('+2 days')) . "</br>"; 
+//echo winkelwagenId("liesenborghs.kristof@gmail.com") . "</br>"; 
+//$time = strtotime("tomorrow"); 
+//echo $time . "</br>";
+//echo date("Y-m-d", $time); 
+
+
+$productSvc = new ProductService(); 
+$productLijstByCategorie = $productSvc->getProductListByCategorieList(); 
+foreach ($productLijstByCategorie as $productLijst) {
+    echo key($productLijst) . "</br>"; 
+//    var_dump($productLijst); 
+    foreach ($productLijst as $lijst) {
+        foreach ($lijst as $product) {
+//        var_dump($product); 
+        echo $product->getProductNaam() . "</br>";
+        }
+    }
+}
