@@ -23,4 +23,11 @@ class BestellijnService {
         $bestelbon = $bestellijnDAO->getByBestellingId($bestelling->getBestellingId()); 
         return $bestelbon; 
     }
+    
+    public function setBestellijnen($bestelling, $tempBestellijnen) {
+        $bestellijnDAO = new BestellijnDAO();
+        $bestellijnDAO->setBestellijnen($bestelling->getBestellingId(), $tempBestellijnen); 
+    }
+    
+    
 }

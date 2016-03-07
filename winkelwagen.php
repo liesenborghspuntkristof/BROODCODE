@@ -4,6 +4,9 @@ require_once 'bootstrap.php';
 require_once 'algemeneFuncties.php';
 
 use KristofL\PHPProject\Business\BestellingService;
+use KristofL\PHPProject\Business\BestellijnService; 
+
+
 
 
 /*
@@ -17,6 +20,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     exit(0);
 } else {
     $klant = unserialize($_SESSION["klant"]); 
+    $bestellijnSvc = new BestellijnService();
     $bestellingSvc = new BestellingService();
     $winkelwagen = $bestellingSvc->createWinkelwagen($klant->getEmailadres()); 
     $_SESSION["winkelwagen"] = serialize($winkelwagen); 

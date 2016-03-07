@@ -40,4 +40,18 @@ class BestellijnDAO {
         $dbh = null; 
         return $lijst;
     }
+    
+    public function setBestellijnen ($bestellingId, $tempBestellijnen ) {
+        $sql = "INSERT INTO bestellijnen (bestellingID, productID, hoeveelheid) VALUES (:bestellingID, :productID, :hoeveelheid)";  
+        
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $dbh->beginTransaction();
+        $stmt = $dbh->prepare($sql); 
+        foreach ($tempBestellijnen as $productId => $hoeveelheid) {
+            $stmt->execute(array(':bestellingID' => $bestellingId, ':productID' => $productId, ':hoeveelheid' => $hoeveelheid)); 
+        }
+        $dbh->commit(); 
+        // nog een exeption of rollback tussen zetten
+        $dbh = null; 
+    }
 }

@@ -5,6 +5,7 @@ namespace KristofL\PHPProject\Business;
 
 use KristofL\PHPProject\Data\BestellingDAO; 
 use KristofL\PHPProject\Entities\Winkelwagen;
+use KristofL\PHPProject\Business\BestellijnService; 
 
 
 require_once 'algemeneFuncties.php';
@@ -39,5 +40,19 @@ class BestellingService {
         return $bestellinglijst; 
     }
     
+    public function setTempBestelling($klant, $afhaaldatum, $tempBestellijnen) {
+        $bestellingDAO = new BestellingDAO();
+        $bestellingDAO->setTempBestelling($afhaaldatum, $klant->getEmailadres()); 
+        $bestelling = $bestellingDAO->getByDateFromId($klant->getEmailadres(), $afhaaldatum); 
+        $bestellijnSvc = new BestellijnService();
+        $bestellijnSvc->setBestellijnen($bestelling, $tempBestellijnen); 
+        $tempBestelbon = $bestellijnSvc->getBestelbon($bestelling); 
+        return $tempBestelbon; 
+    }
+    
+    public function confirmBestelbon ($bestelbon) { //array v. Obj. Bestellijn
+        $bestellingDAO = new BestellingDAO();
+        $bestellingDAO->confirmBestelling(current($bestelbon)->getBestelling()->getBestellingId()); 
+    }
    
 }
