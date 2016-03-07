@@ -4,7 +4,8 @@
 namespace KristofL\PHPProject\Business; 
 
 use KristofL\PHPProject\Data\BestellingDAO; 
-use KristofL\PHPProject\Entities\Winkelwagen; 
+use KristofL\PHPProject\Entities\Winkelwagen;
+
 
 require_once 'algemeneFuncties.php';
 
@@ -37,5 +38,6 @@ class BestellingService {
         $bestellinglijst = $bestellingDAO->getByKlant($klant); 
         return $bestellinglijst; 
     }
+    
    
 }

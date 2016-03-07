@@ -27,19 +27,21 @@ class ProductService {
         return $productlijst;
     }
     
-//    public function getProductListByCategorieList() {
-//        $productDAO = new ProductDAO(); 
-//        $categorieDAO = new CategorieDAO(); 
-//        $categorielijst = $categorieDAO->getAll();
-//        $lijst = array(); 
-//        foreach ($categorielijst as $categorie) {
-//            $lijstnaam = array($categorie->getCategorieNaam()); 
-//            $productlijst = $productDAO->getByCategorie($categorie); 
-//            $productlistByCategorie = array_fill_keys($lijstnaam, $productlijst);
-//            array_push($lijst, $productlistByCategorie); 
-//        }
-//        return $lijst; 
-//    }
+    public function getProductListByCategorieList() {
+        $productDAO = new ProductDAO(); 
+        $categorieDAO = new CategorieDAO(); 
+        $categorielijst = $categorieDAO->getAll();
+        $lijst = array(); 
+        foreach ($categorielijst as $categorie) {
+            $key = array($categorie->getCategorieNaam()); 
+            $productlijstByCategorie = $productDAO->getByCategorie($categorie);
+            if (!empty($productlijstByCategorie)) {
+            $productenByCategorie = array_fill_keys($key, $productlijstByCategorie);
+            $lijst =  array_merge($lijst, $productenByCategorie); 
+            }
+        }
+        return $lijst; 
+    }
     
     
 }

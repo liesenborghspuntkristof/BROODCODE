@@ -7,6 +7,7 @@ use KristofL\PHPProject\Data\ProductDAO;
 use KristofL\PHPProject\Data\BestellijnDAO;
 use KristofL\PHPProject\Business\ProductService; 
 use KristofL\PHPProject\Data\CategorieDAO; 
+use KristofL\PHPProject\Business\BestellijnService; 
 
 require_once 'bootstrap.php';
 require_once 'validationFunctions.php';
@@ -206,15 +207,24 @@ require_once 'algemeneFuncties.php';
 //echo date("Y-m-d", $time); 
 
 
-$productSvc = new ProductService(); 
-$productLijstByCategorie = $productSvc->getProductListByCategorieList(); 
-foreach ($productLijstByCategorie as $productLijst) {
-    echo key($productLijst) . "</br>"; 
-//    var_dump($productLijst); 
-    foreach ($productLijst as $lijst) {
-        foreach ($lijst as $product) {
-//        var_dump($product); 
-        echo $product->getProductNaam() . "</br>";
-        }
-    }
-}
+//$productSvc = new ProductService(); 
+//$productenByCategorie = $productSvc->getProductListByCategorieList(); 
+//var_dump($productenByCategorie); 
+//foreach ($productenByCategorie as $lijstNaam => $lijstValue) {
+//    echo $lijstNaam . "</br>"; 
+////    var_dump($lijstValue);
+//    foreach ($lijstValue as $product) {
+//        echo $product->getProductNaam() . "</br>"; 
+//    }
+//} 
+
+
+$bestellingDAO = new BestellingDAO();
+$bestelling = $bestellingDAO->getById(1); 
+
+$bestellijnSvc = new BestellijnService(); 
+$bestelbon = $bestellijnSvc->getBestelbon($bestelling); 
+
+var_dump (current($bestelbon)->getBestelling()->getBevestigd()); 
+
+include_once 'src/KristofL/PHPProject/Presentation/bestelbonPage.php'; 

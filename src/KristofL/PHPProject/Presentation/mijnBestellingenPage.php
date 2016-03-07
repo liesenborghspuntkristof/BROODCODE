@@ -25,13 +25,13 @@ namespace KristofL\PHPProject\Presentation;
                         <select name="herbestellingsdatum">
                             <option>Herbestelling datum</option>                  
                             <?php if ($winkelwagen->getBestellingMorgen()->getBestellingId() == null) { ?>
-                                <option value="<?php echo strtotime("+1 day"); ?>">Morgen [<?php echo date(("d-m-Y"), strtotime("+1 day")); ?>]</option>
+                                <option value="<?php echo strtotime("+1 day"); ?>">Morgen [<?php echo date(("Y-m-d"), strtotime("+1 day")); ?>]</option>
                             <?php } ?>
                             <?php if ($winkelwagen->getBestellingOvermorgen()->getBestellingId() == null) { ?>
-                                <option value="<?php echo strtotime("+2 days"); ?>">Overmorgen [<?php echo date(("d-m-Y"), strtotime("+2 days")); ?>]</option>
+                                <option value="<?php echo strtotime("+2 days"); ?>">Overmorgen [<?php echo date(("Y-m-d"), strtotime("+2 days")); ?>]</option>
                             <?php } ?>
                             <?php if ($winkelwagen->getBestellingOverovermorgen()->getBestellingId() == null) { ?>
-                                <option value="<?php echo strtotime("+3 days"); ?>">Morgen [<?php echo date(("d-m-Y"), strtotime("+3 days")); ?>]</option>
+                                <option value="<?php echo strtotime("+3 days"); ?>">Morgen [<?php echo date(("Y-m-d"), strtotime("+3 days")); ?>]</option>
                             <?php } ?>                          
                         </select>
                         <input type="submit" value="bevestig datum">

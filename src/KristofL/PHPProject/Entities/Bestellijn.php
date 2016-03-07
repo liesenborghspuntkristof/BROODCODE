@@ -16,35 +16,35 @@ namespace KristofL\PHPProject\Entities;
  */
 class Bestellijn {
      
-    private $bestellingId;  
-    private $productId; 
+    private $bestelling; //obj. bestelling
+    private $product; //obj. product
     private $hoeveelheid; 
     
-    public function __construct($bestellingId, $productId, $hoeveelheid) {     
-        $this->bestellingId = $bestellingId;
-        $this->productId = $productId;
+    public function __construct($bestelling, $product, $hoeveelheid) {     
+        $this->bestelling = $bestelling;
+        $this->product = $product;
         $this->hoeveelheid = $hoeveelheid;
     }
     
     
-    function getBestellingId() {
-        return $this->bestellingId;
+    function getBestelling() {
+        return $this->bestelling;
     }
 
-    function getProductId() {
-        return $this->productId;
+    function getProduct() {
+        return $this->product;
     }
 
     function getHoeveelheid() {
         return $this->hoeveelheid;
     }
     
-    function setBestellingId($bestellingId) {
-        $this->bestellingId = $bestellingId;
+    function setBestelling($bestelling) {
+        $this->bestelling = $bestelling;
     }
 
-    function setProductId($productId) {
-        $this->productId = $productId;
+    function setProduct($product) {
+        $this->product = $product;
     }
 
     function setHoeveelheid($hoeveelheid) {

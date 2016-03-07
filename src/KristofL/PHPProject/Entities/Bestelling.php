@@ -22,19 +22,21 @@ class Bestelling {
     private $afhaaldatum; 
     private $klant; // = obj. Klant 
     private $afgehaald; 
-    private $referentie; 
+    private $referentie;
+    private $bevestigd; 
     
-    private function __construct($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie) {
+    private function __construct($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie, $bevestigd) {
         $this->bestellingId = $bestellingId;
         $this->afhaaldatum = $afhaaldatum;
         $this->klant = $klant;
         $this->afgehaald = $afgehaald;
         $this->referentie = $referentie; 
+        $this->bevestigd = $bevestigd; 
     }
     
-    public static function create($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie) {
+    public static function create($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie, $bevestigd) {
         if (!isset(self::$idMap[$bestellingId])) {
-            self::$idMap[$bestellingId] = new Bestelling($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie); 
+            self::$idMap[$bestellingId] = new Bestelling($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie, $bevestigd); 
         }
         return self::$idMap[$bestellingId];
     }
@@ -48,7 +50,7 @@ class Bestelling {
     }
 
     function getKlant() {
-        return $this->Klant;
+        return $this->klant;
     }
 
     function getAfgehaald() {
@@ -57,6 +59,10 @@ class Bestelling {
     
     function getReferentie() {
         return $this->referentie; 
+    }
+    
+    function getBevestigd() {
+        return $this->bevestigd; 
     }
 
     function setAfhaaldatum($afhaaldatum) {
@@ -73,6 +79,10 @@ class Bestelling {
     
     function setReferentie($referentie) {
         $this->referentie = $referentie; 
+    }
+    
+    function setBevestigd($bevestigd) {
+        $this->bevestigd = $bevestigd; 
     }
 
 

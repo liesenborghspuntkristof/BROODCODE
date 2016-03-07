@@ -8,7 +8,9 @@
 
 namespace KristofL\PHPProject\Data;
 
-use KristofL\PHPProject\Entities\Bestellijn;  
+use KristofL\PHPProject\Entities\Bestellijn; 
+use KristofL\PHPProject\Data\BestellingDAO; 
+use KristofL\PHPProject\Data\ProductDAO; 
 use KristofL\PHPProject\Data\DBConfig; 
 use PDO; 
 
@@ -27,8 +29,12 @@ class BestellijnDAO {
         $stmt->execute(array(':bestellingID' => $bestellingId)); 
         $resultSet = $stmt->fetchAll(PDO::FETCH_ASSOC); 
         $lijst = array(); 
-        foreach ($resultSet as $rij) {
-            $bestellijn = new Bestellijn($rij["bestellingID"], $rij["productID"], $rij["hoeveelheid"]); 
+        $bestellingDAO = new BestellingDAO(); 
+        $bestelling = $bestellingDAO->getById($bestellingId);
+        $productDAO = new ProductDAO();
+        foreach ($resultSet as $rij) {         
+            $product = $productDAO->getByProductId($rij["productID"]) ; 
+            $bestellijn = new Bestellijn($bestelling, $product, $rij["hoeveelheid"]); 
             array_push($lijst, $bestellijn); 
         }
         $dbh = null; 

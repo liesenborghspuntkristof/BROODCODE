@@ -36,12 +36,25 @@ class ProductDAO {
         return $lijst;
     }
     
-    public function getByProductNaam($productnaam) {
-        $sql = "SELECT productID, productNaam, productOmschrijving, productPrijs, producten.categorieID as categorieNR, categorieNaam  FROM producten, categorieen WHERE productNaam = :productNaam AND producten.categorieID = categorieen.categorieID";
+//    public function getByProductNaam($productnaam) {
+//        $sql = "SELECT productID, productNaam, productOmschrijving, productPrijs, producten.categorieID as categorieNR, categorieNaam  FROM producten, categorieen WHERE productNaam = :productNaam AND producten.categorieID = categorieen.categorieID";
+//        
+//        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+//        $stmt = $dbh->prepare($sql); 
+//        $stmt->execute(array(':productNaam' => $productnaam)); 
+//        $rij = $stmt->fetch(PDO::FETCH_ASSOC); 
+//        $categorie = Categorie::create($rij["categorieNR"], $rij["categorieNaam"]); 
+//        $product = Product::create($rij["productID"], $rij["productNaam"], $rij["productOmschrijving"], $rij["productPrijs"], $categorie); 
+//        $dbh = null; 
+//        return $product;         
+//    }
+    
+    public function getByProductId($productId) {
+        $sql = "SELECT productID, productNaam, productOmschrijving, productPrijs, producten.categorieID as categorieNR, categorieNaam  FROM producten, categorieen WHERE productID = :productID AND producten.categorieID = categorieen.categorieID";
         
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql); 
-        $stmt->execute(array(':productNaam' => $productnaam)); 
+        $stmt->execute(array(':productID' => $productId)); 
         $rij = $stmt->fetch(PDO::FETCH_ASSOC); 
         $categorie = Categorie::create($rij["categorieNR"], $rij["categorieNaam"]); 
         $product = Product::create($rij["productID"], $rij["productNaam"], $rij["productOmschrijving"], $rij["productPrijs"], $categorie); 
