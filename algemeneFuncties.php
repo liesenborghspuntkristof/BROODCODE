@@ -1,5 +1,7 @@
 <?php
 
+use KristofL\PHPProject\Exceptions\FunctionException;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -78,7 +80,7 @@ function passwordEncrypt($username, $password) {
     if (defined("CRYPT_BLOWFISH") && CRYPT_BLOWFISH) {
         $salt = strtoupper(strrev($username));
         $data = crypt($password, $salt);
-        $hashedValue = hash('sha256', $data); 
+        $hashedValue = hash('sha256', $data);
         return $hashedValue; //length == 64; 
     } else {
         throw new LoginException("No blowfish for sale, try again or contact support");
@@ -102,22 +104,27 @@ function passwordGenerator() {
     return $randomPassword;
 }
 
-
 function winkelwagenId($login) {
-    $winkelwagenId = abs(crc32("De winkelwagen van login: " . $login)); 
-    return $winkelwagenId; 
+    $winkelwagenId = abs(crc32("De winkelwagen van login: " . $login));
+    return $winkelwagenId;
 }
 
 function interpreteerDate($date) {
     switch ($date) {
         case "vandaag":
-            $time = date("U", "today"); 
+            $time = date("U", strtotime("today"));
             break;
         case "morgen":
-            $time = date("U", "+1 day"); 
+            $time = date("U", strtotime("+1 day"));
             break;
-
+        case "overmorgen":
+            $time = date("U", strtotime("+2 days"));
+            break;
+        case "overovermorgen":
+            $time = date("U", strtotime("+3 days"));
+            break;
         default:
-            break;
+            throw new FunctionException("time error: wrong universe or limited dimension");
     }
+    return $time; //timestamp of day
 }

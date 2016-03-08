@@ -8,6 +8,7 @@ use KristofL\PHPProject\Data\BestellijnDAO;
 use KristofL\PHPProject\Business\ProductService; 
 use KristofL\PHPProject\Data\CategorieDAO; 
 use KristofL\PHPProject\Business\BestellijnService; 
+use KristofL\PHPProject\Exceptions\FunctionException; 
 
 require_once 'bootstrap.php';
 require_once 'validationFunctions.php';
@@ -217,6 +218,20 @@ require_once 'algemeneFuncties.php';
 //        echo $product->getProductNaam() . "</br>"; 
 //    }
 //} 
+
+
+
+$date = "vandaag"; 
+try {
+    $tijd = interpreteerDate($date);
+    echo $tijd . "</br>"; 
+} catch (FunctionException $ex) {
+    echo "foutje" . "</br>";
+}
+
+
+
+
 
 
 $time = date("U", strtotime("now")); 

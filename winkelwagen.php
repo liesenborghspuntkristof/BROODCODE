@@ -29,6 +29,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     include_once 'src/KristofL/PHPProject/Presentation/header_logedin.php';
     include_once 'src/KristofL/PHPProject/Presentation/winkelwagenPage.php';
     if (isset($_GET["msg"])) { echo base64_decode($_GET["msg"]); }
+//    if (isset($_SESSION["msg"])) { echo "</br>" . $_SESSION["msg"]; }
     include_once 'src/KristofL/PHPProject/Presentation/footer.php';
     
 //        var_dump ($winkelwagen);

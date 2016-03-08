@@ -5,7 +5,7 @@ require_once 'algemeneFuncties.php';
 
 use KristofL\PHPProject\Business\ProductService;
 use KristofL\PHPProject\Business\BestellingService;
-
+use KristofL\PHPProject\Exceptions\FunctionException;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -25,20 +25,13 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     exit(0);
 } else {
     if (isset($_GET["date"])) {
-        switch (TRUE) {
-            case $_GET["date"] == "morgen":
-                $_SESSION["date"] = date(("Y-m-d"), strtotime("+1 day"));
-                break;
-            case $_GET["date"] == "overmorgen":
-                $_SESSION["date"] = date(("Y-m-d"), strtotime("+2 days"));
-                break;
-            case $_GET["date"] == "overovermorgen":
-                $_SESSION["date"] = date(("Y-m-d"), strtotime("+3 days"));
-                break;
-            default :
-                $location = "location: winkelwagen.php?msg=" . base64_encode("kies een mogelijke afhaaldatum in 'mijn winkelwagen' of 'mijn bestellingen'");
-                header($location);
-                exit(0);
+        try {
+            $time = interpreteerDate($_GET["date"]);
+            $_SESSION["date"] = date(("Y-m-d"), $time);
+        } catch (FunctionException $ex) {
+            $location = "location: winkelwagen.php?msg=" . base64_encode($ex->getMessage());
+            header($location);
+            exit(0);
         }
     }
     $klant = unserialize($_SESSION["klant"]);
@@ -47,7 +40,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     $bestellingSvc = new BestellingService();
     $bestellinglijst = $bestellingSvc->getBestellingenByKlant($klant);
 
-    if (isset($_GET["action"]) && $_GET["action"] == "bestelling") {
+    if (isset($_GET["action"]) && $_GET["action"] == "bestelling" && isset($_GET["date"])) {
         $productlijst = $productSvc->getProductList();
         $tempBestellijnen = array();
         foreach ($productlijst as $product) {
@@ -64,7 +57,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
         }
         $tempBestelbon = $bestellingSvc->setTempBestelling($klant, $_SESSION["date"], $tempBestellijnen);
         $_SESSION["bestelbon"] = serialize($tempBestelbon);
-        header("location: winkelen.php?action=bevestig");
+        header("location: winkelen.php?action=bevestig&date=");
         exit(0);
     }
 
@@ -75,7 +68,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     if (isset($_GET["action"]) && $_GET["action"] == "bevestig" && isset($_SESSION["bestelbon"])) {
         $bestelbon = unserialize($_SESSION["bestelbon"]);
         include_once 'src/KristofL/PHPProject/Presentation/bestelbonPage.php';
-        include_once 'src/KristofL/PHPProject/Presentation/bestelbonForm.php'; 
+        include_once 'src/KristofL/PHPProject/Presentation/bestelbonForm.php';
     } else {
         if (isset($_GET["msg"])) {
             echo base64_decode($_GET["msg"]);
