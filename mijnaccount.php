@@ -19,19 +19,12 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     exit(0);
 } else {
     $klantSvc = new KlantService();
-//    if (!isset($_SESSION["klant"])) {     
-//        $klant = $klantSvc->getklantgegevens($_SESSION["emailadres"]);         
-//    } else {
-        $klant = unserialize($_SESSION["klant"]); 
-//    }
-
+    $klant = unserialize($_SESSION["klant"]); 
     if (strlen($klant->getWachtwoord()) !== 64) {
         $wachtwoord = $klant->getWachtwoord() . "<span class='warning'>  --wachtwoord is niet beveiligd, wijzig je wachtwoord</span>";
     } else {
         $wachtwoord = "**********";
     }
-
-
     if (isset($_GET["action"]) && $_GET["action"] == "wachtwoord") {
         require_once 'src/KristofL/PHPProject/Presentation/header_logedin.php';
         require_once 'src/KristofL/PHPProject/Presentation/mijnAccountForm.php';
@@ -55,7 +48,8 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
             exit(0);
         } else {
             $klantsvc = new KlantService();
-            $klantsvc->encryptEnSetNieuwWachtwoord($klant, $_POST["wachtwoord"]);
+            $updateKlant = $klantsvc->encryptEnSetNieuwWachtwoord($klant, $_POST["wachtwoord"]);
+            $_SESSION["klant"] = serialize($updateKlant); 
             header('location: mijnaccount.php');
             exit(0);
         }
@@ -100,7 +94,8 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
             header($location);
             exit(0);
         } else {
-            $klantSvc->updateGegevens($klant); 
+            $updateKlant = $klantSvc->updateGegevens($klant); 
+            $_SESSION["klant"] = serialize($updateKlant);
             header ('location: mijnaccount.php'); 
             exit(0); 
         }

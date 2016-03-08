@@ -219,6 +219,10 @@ require_once 'algemeneFuncties.php';
 //} 
 
 
+$time = date("U", strtotime("now")); 
+echo $time . "</br>"; 
+echo date("Y-m-d", $time); 
+
 $bestellingDAO = new BestellingDAO();
 $bestelling = $bestellingDAO->getById(1); 
 

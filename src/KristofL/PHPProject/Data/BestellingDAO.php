@@ -54,8 +54,8 @@ class BestellingDAO {
     }
 
     public function getByKlant($klant) { // = obj. Klant
-        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald, referentie, bevestigd FROM bestellingen WHERE emailadres = :emailadres";
-
+        $sql = "SELECT bestellingID, afhaaldatum, emailadres, afgehaald, referentie, bevestigd FROM bestellingen WHERE emailadres = :emailadres AND bevestigd = TRUE";
+        // bovenstaande lijn geeft alleen de bevestigde bestellingen per klant weer
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute(array(':emailadres' => $klant->getEmailadres()));
@@ -92,9 +92,26 @@ class BestellingDAO {
 
     public function confirmBestelling($bestellingId) {
         $sql = "UPDATE bestellingen SET bevestigd = TRUE WHERE bestellingID = :bestellingID";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql);
         $stmt->execute(array(':bestellingID' => $bestellingId));
         $dbh = null;
     }
-
+    
+    public function updateBestellingReferentie($bestellingId, $referentie) {
+        $sql = "UPDATE bestellingen SET referentie = :referentie WHERE bestellingID = :bestellingID";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(array(':referentie' => $referentie, ':bestellingID' => $bestellingId));
+        $dbh = null;
+    }
+    
+    public function clearBestellingReferentie($bestellingId) {
+        $sql = "UPDATE bestellingen SET referentie = NULL WHERE bestellingID = :bestellingID";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(array(':bestellingID' => $bestellingId));
+        $dbh = null;
+    }
+    
 }

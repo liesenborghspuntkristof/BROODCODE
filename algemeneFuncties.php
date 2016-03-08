@@ -107,3 +107,17 @@ function winkelwagenId($login) {
     $winkelwagenId = abs(crc32("De winkelwagen van login: " . $login)); 
     return $winkelwagenId; 
 }
+
+function interpreteerDate($date) {
+    switch ($date) {
+        case "vandaag":
+            $time = date("U", "today"); 
+            break;
+        case "morgen":
+            $time = date("U", "+1 day"); 
+            break;
+
+        default:
+            break;
+    }
+}

@@ -6,6 +6,7 @@ namespace KristofL\PHPProject\Business;
 use KristofL\PHPProject\Data\BestellingDAO; 
 use KristofL\PHPProject\Entities\Winkelwagen;
 use KristofL\PHPProject\Business\BestellijnService; 
+use KristofL\PHPProject\Exceptions\BestellingException; 
 
 
 require_once 'algemeneFuncties.php';
@@ -34,7 +35,7 @@ class BestellingService {
         return $winkelwagen; 
     }
     
-    public function getBestellingenByKlant ($klant) {
+    public function getBestellingenByKlant ($klant) { //Bestelling == Bevestigde bestellingen
         $bestellingDAO = new BestellingDAO(); 
         $bestellinglijst = $bestellingDAO->getByKlant($klant); 
         return $bestellinglijst; 
@@ -53,6 +54,16 @@ class BestellingService {
     public function confirmBestelbon ($bestelbon) { //array v. Obj. Bestellijn
         $bestellingDAO = new BestellingDAO();
         $bestellingDAO->confirmBestelling(current($bestelbon)->getBestelling()->getBestellingId()); 
+    }
+    
+    public function updateReferentie($bestelling) { //obj. van Bestelling met setReferentie
+        $bestellingDAO = new BestellingDAO(); 
+        $bestellingDAO->updateBestellingReferentie($bestelling->getBestellingId(), $bestelling->getReferentie()); 
+    }
+    
+    public function clearReferentie($bestelling) {
+        $bestellingDAO = new BestellingDAO(); 
+        $bestellingDAO->clearBestellingReferentie($bestelling->getBestellingId()); 
     }
    
 }

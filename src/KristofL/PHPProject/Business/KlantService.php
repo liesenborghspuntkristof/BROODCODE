@@ -62,7 +62,7 @@ class KlantService {
             throw new NewRegistryException("Er is al een gebruiker met dit emailadres");
         } else {
             $wachtwoord = passwordGenerator(); 
-            $klantDAO->registerNieuweKlant($emailadres, $wachtwoord, $voornaam, $familienaam, $adres, $postId); 
+            $klantDAO->registerNieuweKlant($emailadres, $wachtwoord, $voornaam, $familienaam, $adres, $postId);
         }
     }
     
@@ -75,12 +75,16 @@ class KlantService {
     public function encryptEnSetNieuwWachtwoord ($klant, $nieuwWachtwoord) {
         $encryptedWachtwoord = passwordEncrypt($klant->getEmailadres(), $nieuwWachtwoord); 
         $klantDAO = new KlantDAO(); 
-        $klantDAO->setNieuwWachtwoord($klant->getEmailadres(), $encryptedWachtwoord); 
+        $klantDAO->setNieuwWachtwoord($klant->getEmailadres(), $encryptedWachtwoord);
+        $updateKlant = $this->getklantgegevens($klant->getEmailadres()); // update klantgegevens
+        return $updateKlant;  // return geupdatet klantgegevens
     }
     
     public function updateGegevens ($klant) {
         $klantDAO = new KlantDAO(); 
-        $klantDAO->updateKlantengegevens($klant); 
+        $klantDAO->updateKlantengegevens($klant);
+        $updateKlant = $this->getklantgegevens($klant->getEmailadres()); // update klantgegevens
+        return $updateKlant; // return geupdatet klantgegevens
     }
 }
     
