@@ -84,7 +84,7 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                     if ($_POST[$product->getProductId()] >= 0 && $_POST[$product->getProductId()] <= 20) {
                         if ($_POST[$product->getProductId()] > 0) {
                             $tempBestellijn = array($product->getProductId() => $_POST[$product->getProductId()]);
-                            $tempBestellijnen = array_merge($tempBestellijnen, $tempBestellijn);
+                            $tempBestellijnen = array_replace($tempBestellijnen, $tempBestellijn);
                         }
                     } else {
                         $location = "location: winkelen.php?msg=" . base64_encode("foutieve invoer, gelieve de waarde niet te manipuleren");
@@ -92,7 +92,11 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                         exit(0);
                     }
                 }
-                $tempBestelbon = $bestellingSvc->setTempBestelling($klant, $date, $tempBestellijnen);
+                if ($bestelling->getBestellingId() == NULL) {
+                    $bestellingSvc->setTempBestelling($klant, $date, $tempBestellijnen);
+                } else {
+                    $bestellingSvc->updateBestelling($bestelling, $tempBestellijnen); 
+                }        
                 $location = "location: winkelen.php?action=bevestig&date=" . $GETtime;
                 header($location);
                 exit(0);           
@@ -129,8 +133,8 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                     exit(0);
                 }
                 if ($herbestelling->getBevestigd()) {
-                    $tempBestellijnen = $bestellijnSvc->getBestelbon($herbestelling);
-                    $tempBestelling = $bestellingSvc->setTempBestelling($klant, $GETtime, $tempBestellijnen);
+                    $tempBestellijnen = $bestellijnSvc->getTempBestellijnen($herbestelling);
+                    $bestellingSvc->setTempBestelling($klant, $GETtime, $tempBestellijnen);
                     $location = "location: winkelen.php?action=bevestig&date=" . $GETtime;
                     header($location);
                     exit(0);
@@ -158,11 +162,13 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
             
         case "annuleer":
             if (isset($_GET["button"]) && $_GET["button"] == "annuleer" && $bestelling->getBestellingId() !== NULL && $GETtime !== "vandaag" && $_SESSION["annuleer"] == "2") {
-                // wis bestelling
+                $bestellingSvc->annuleerBestelling($bestelling); 
+                header("location: winkelwagen.php");
+                exit(0);
             } elseif ($bestelling->getBestellingId() !== NULL && $GETtime !== "vandaag") {
                 $_SESSION["annuleer"]++; 
                 $bestelbon = $bestellijnSvc->getBestelbon($bestelling); 
-                echo "<p>Klik nogmaals op 'Annuleer bestelling' om onderstaande bestelling te verwijderen</p>"; 
+                echo "<p style='margin-top: 8em;'>Klik nogmaals op 'Annuleer bestelling' om onderstaande bestelling te verwijderen</p>"; 
                 echo "<center><a href='winkelen.php?action=annuleer&date=" . $GETtime . "&button=annuleer'>Annuleer bestelling</a></center>"; 
                 include_once 'src/KristofL/PHPProject/Presentation/bestelbonPage.php';
             }

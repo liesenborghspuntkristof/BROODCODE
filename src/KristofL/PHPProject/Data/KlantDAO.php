@@ -24,10 +24,8 @@ class KlantDAO {
 
     public function getAll() {
         $sql = "SELECT emailadres, wachtwoord, voornaam, familienaam, adres, klanten.postID as woonplaatsID, zipcode, naam, geblokkeerd FROM klanten, woonplaatsen WHERE klanten.postID = woonplaatsen.postID";
-//        var_dump($sql); 
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $resultSet = $dbh->query($sql); 
-//        var_dump($resultSet); 
         $lijst = array(); 
         foreach ($resultSet as $rij) {
             $woonplaats = Woonplaats::create($rij["woonplaatsID"], $rij["zipcode"], $rij["naam"]); 
@@ -40,7 +38,6 @@ class KlantDAO {
     
     public function getByEmailadres($emailadres) {
         $sql = "SELECT emailadres, wachtwoord, voornaam, familienaam, adres, klanten.postID as woonplaatsID, zipcode, naam, geblokkeerd FROM klanten, woonplaatsen WHERE klanten.postID = woonplaatsen.postID AND emailadres = :emailadres";
-//        var_dump($sql); 
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql); 
         $stmt->execute(array(':emailadres' => $emailadres)); 
@@ -53,7 +50,6 @@ class KlantDAO {
     
     public function registerNieuweKlant($emailadres, $wachtwoord, $voornaam, $familienaam, $adres, $postId) {
         $sql = "INSERT INTO klanten(emailadres, wachtwoord, voornaam, familienaam, adres, postID) VALUES (:emailadres, :wachtwoord, :voornaam, :familienaam, :adres, :postID)";
-//        var_dump($sql); 
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
         $stmt = $dbh->prepare($sql); 
         $stmt->execute(array(':emailadres' => $emailadres, ':wachtwoord' => $wachtwoord, ':voornaam' => $voornaam, ':familienaam' => $familienaam, ':adres' => $adres, ':postID' => $postId)); 

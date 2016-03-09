@@ -122,4 +122,12 @@ class BestellingDAO {
         $dbh = null;       
     }
     
+    public function deleteOldTemporary() {
+        $sql= "DELETE bestellingen, bestellijnen FROM bestellingen, bestellijnen WHERE bestellingen.bestellingID = bestellijnen.bestellingID AND bevestigd = FALSE AND afhaaldatum < :vandaag";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(array(':vandaag' => date("Y-m-d", strtotime("today"))));
+        $dbh = null;       
+    }
+    
 }

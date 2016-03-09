@@ -276,8 +276,19 @@ switch ($Ymd) {
     echo $bestelling . "</br>";  
 
 
+//$bestellijnDAO = new BestellijnDAO();
+//$bestellijnDAO->deleteLoseBestellijnen(); 
 
-
+    $productSvc = new ProductService();
+    $productlijst = $productSvc->getProductList(); 
+    $tempBestellijnen =  array(); 
+    foreach ($productlijst as $product) {
+        $tempBestellijn = array($product->getProductId() => $product->getProductNaam());
+        var_dump($tempBestellijn); 
+        $tempBestellijnen = array_replace($tempBestellijnen, $tempBestellijn);
+    }
+    var_dump($tempBestellijnen); 
+    
 
 //
 //$time = date("U", strtotime("now")); 

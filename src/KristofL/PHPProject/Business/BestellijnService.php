@@ -18,15 +18,31 @@ use KristofL\PHPProject\Data\BestellijnDAO;
  */
 class BestellijnService {
     
-    public function getBestelbon($bestelling) { //obj. v. bestelling
+    public function getBestelbon($bestelling) { //lijst v. obj. v. bestellijn
         $bestellijnDAO = new BestellijnDAO(); 
         $bestelbon = $bestellijnDAO->getByBestellingId($bestelling->getBestellingId()); 
         return $bestelbon; 
     }
     
+    public function getTempBestellijnen($bestelling) { //Array met Key == productId && value == hoeveelheid:int
+        $bestellijnDAO = new BestellijnDAO(); 
+        $tempBestelbon = $bestellijnDAO->getByBestellingId($bestelling->getBestellingId());
+        $tempBestellijnen = array(); 
+        foreach ($tempBestelbon as $tempBestellijn) {
+        $tempBestellijnArray = array($tempBestellijn->getProduct()->getProductId() => $tempBestellijn->getHoeveelheid());
+        $tempBestellijnen = array_replace($tempBestellijnen, $tempBestellijnArray);
+    }
+        return $tempBestellijnen; 
+    }
+    
     public function setBestellijnen($bestelling, $tempBestellijnen) {
         $bestellijnDAO = new BestellijnDAO();
         $bestellijnDAO->setBestellijnen($bestelling->getBestellingId(), $tempBestellijnen); 
+    }
+    
+    public function deleteBestellijnen($bestelling) { //obj. v. bestelling
+        $bestellijnDAO = new BestellijnDAO();
+        $bestellijnDAO->deleteBestellijnen($bestelling->getBestellingId()); 
     }
     
     

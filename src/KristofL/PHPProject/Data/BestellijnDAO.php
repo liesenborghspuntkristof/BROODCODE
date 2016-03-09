@@ -54,4 +54,19 @@ class BestellijnDAO {
         // nog een exeption of rollback tussen zetten
         $dbh = null; 
     }
+    
+    public function deleteBestellijnen ($bestellingId) {
+        $sql= "DELETE FROM bestellijnen WHERE bestellingID = :bestellingID";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(array(':bestellingID' => $bestellingId));
+        $dbh = null; 
+    }
+    
+    public function deleteLoseBestellijnen () { //quickFix during testing
+        $sql= "DELETE FROM bestellijnen WHERE bestellingID IN (SELECT * FROM No_Id)"; // No_Id == view -> Create View No_Id AS (SELECT DISTINCT bestellijnen.bestellingID FROM bestellijnen WHERE bestellingID NOT IN(SELECT bestellingID FROM bestellingen));
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $dbh->query($sql); 
+        $dbh = null; 
+    }
 }

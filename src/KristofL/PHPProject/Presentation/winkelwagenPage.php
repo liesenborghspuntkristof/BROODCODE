@@ -37,7 +37,7 @@ namespace KristofL\PHPProject\Presentation;
                 </td>
             </tr>
             <tr colspan="2">
-                <td><a href="broodcode.php?action=broodcode&date=vandaag">Krijg BroodCode</a></td>         
+                <td colspan="2"><a href="broodcode.php?action=broodcode&date=vandaag">Krijg BroodCode</a></td>         
             <?php } else { ?>
                 <td colspan ="2">Geen afhaling</td>
             <?php } ?>

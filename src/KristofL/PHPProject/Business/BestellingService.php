@@ -72,9 +72,15 @@ class BestellingService {
         $bestelling = $bestellingDAO->getByDateFromId($klant->getEmailadres(), $afhaaldatum); 
         $bestellijnSvc = new BestellijnService();
         $bestellijnSvc->setBestellijnen($bestelling, $tempBestellijnen); 
-        $tempBestelbon = $bestellijnSvc->getBestelbon($bestelling); 
-        return $tempBestelbon; 
+//        $tempBestelbon = $bestellijnSvc->getBestelbon($bestelling); 
+//        return $tempBestelbon; 
     }
+    
+    public function updateBestelling($bestelling, $tempBestellijnen) {
+        $bestellijnSvc = new BestellijnService();
+        $bestellijnSvc->deleteBestellijnen($bestelling); 
+        $bestellijnSvc->setBestellijnen($bestelling, $tempBestellijnen); 
+    } 
     
     public function confirmBestelbon ($bestelbon) { //array v. Obj. Bestellijn
         $bestellingDAO = new BestellingDAO();
@@ -94,5 +100,10 @@ class BestellingService {
     public function annuleerBestelling($bestelling) {
         $bestellingDAO = new BestellingDAO();
         $bestellingDAO->deleteBestellingById($bestelling->getBestellingId()); 
+    }
+    
+    public function autoClear() {
+        $bestellingDAO = new BestellingDAO();
+        $bestellingDAO->deleteOldTemporary();  
     }
 }

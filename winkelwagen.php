@@ -23,6 +23,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     $klant = unserialize($_SESSION["klant"]); 
     $bestellijnSvc = new BestellijnService();
     $bestellingSvc = new BestellingService();
+    $bestellingSvc->autoClear(); 
     $winkelwagen = $bestellingSvc->createWinkelwagen($klant->getEmailadres()); 
     $_SESSION["winkelwagen"] = serialize($winkelwagen); 
  
