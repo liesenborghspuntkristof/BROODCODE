@@ -19,6 +19,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     header('location: login.php');
     exit(0);
 } else {
+    $_SESSION["annuleer"] = 1; 
     $klant = unserialize($_SESSION["klant"]); 
     $bestellijnSvc = new BestellijnService();
     $bestellingSvc = new BestellingService();

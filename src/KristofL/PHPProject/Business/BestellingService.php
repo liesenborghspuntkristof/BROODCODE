@@ -27,11 +27,11 @@ class BestellingService {
     public function createWinkelwagen ($emailadres) {
         date_default_timezone_set("Europe/Brussels"); 
         $bestellingDAO = new BestellingDAO(); 
-        $afhalingVandaag = $bestellingDAO->getByDateFromId($emailadres, date("Y-m-d")); 
-        $bestellingMorgen = $bestellingDAO->getByDateFromId($emailadres, date(("Y-m-d"), strtotime('+1 day'))); 
+        $afhalingVandaag = $bestellingDAO->getByDateFromId($emailadres, date("Y-m-d"));
+        $bestellingMorgen = $bestellingDAO->getByDateFromId($emailadres, date(("Y-m-d"), strtotime('+1 day')));
         $bestellingOvermorgen = $bestellingDAO->getByDateFromId($emailadres, date(("Y-m-d"), strtotime('+2 days')));
         $bestellingOverovermorgen = $bestellingDAO->getByDateFromId($emailadres, date(("Y-m-d"), strtotime('+3 days')));
-        $winkelwagen = new Winkelwagen (winkelwagenId($_SESSION["emailadres"]), $afhalingVandaag, $bestellingMorgen, $bestellingOvermorgen, $bestellingOverovermorgen);
+        $winkelwagen = new Winkelwagen (winkelwagenId($emailadres), $afhalingVandaag, $bestellingMorgen, $bestellingOvermorgen, $bestellingOverovermorgen);
         return $winkelwagen; 
     }
     
@@ -39,6 +39,31 @@ class BestellingService {
         $bestellingDAO = new BestellingDAO(); 
         $bestellinglijst = $bestellingDAO->getByKlant($klant); 
         return $bestellinglijst; 
+    }
+    
+    public function getBestellingByKlantByDatum ($klant, $datum) { 
+        $bestellingDAO = new BestellingDAO(); 
+        $bestelling = $bestellingDAO->getByDateFromId($klant->getEmailadres(), $datum);  
+        return $bestelling; 
+    }
+    
+    public function getBestellingByklantAndId ($klant, $bestellingId) {
+        $value_exist = FALSE; 
+        $bestellingDAO = new BestellingDAO(); 
+        $bestellijst = $bestellingDAO->getByKlant($klant); 
+        foreach ($bestellijst as $bestelling) {
+            switch ($bestelling->getBestellingId()) {
+                case $bestellingId:
+                    $value_exist = TRUE; 
+                    break;
+            }
+        }
+        if ($value_exist) {
+            $herbestelling = $bestellingDAO->getById($bestellingId); 
+            return $herbestelling;
+        } else {
+            throw new BestellingException("Er komt geen bestelling overeen met dit Id");
+        }       
     }
     
     public function setTempBestelling($klant, $afhaaldatum, $tempBestellijnen) {
@@ -66,4 +91,8 @@ class BestellingService {
         $bestellingDAO->clearBestellingReferentie($bestelling->getBestellingId()); 
     }
    
+    public function annuleerBestelling($bestelling) {
+        $bestellingDAO = new BestellingDAO();
+        $bestellingDAO->deleteBestellingById($bestelling->getBestellingId()); 
+    }
 }

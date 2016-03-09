@@ -109,7 +109,7 @@ function winkelwagenId($login) {
     return $winkelwagenId;
 }
 
-function interpreteerDate($date) {
+function interpreteerGETDate($date) {
     switch ($date) {
         case "vandaag":
             $time = date("U", strtotime("today"));
@@ -127,4 +127,24 @@ function interpreteerDate($date) {
             throw new FunctionException("time error: wrong universe or limited dimension");
     }
     return $time; //timestamp of day
+}
+
+function DatumNaarWoord($datum) { //Y-m-d datumnotatie
+    switch ($datum) {
+        case date("Y-m-d", strtotime("today")):
+            $woordDatum = "vandaag";
+            break;
+        case date("Y-m-d", strtotime("+1 day")):
+            $woordDatum = "morgen";
+            break;
+        case date("Y-m-d", strtotime("+2 days")):
+            $woordDatum = "overmorgen";
+            break;
+        case date("Y-m-d", strtotime("+3 days")):
+            $woordDatum = "overovermorgen";
+            break;
+        default:
+            throw new FunctionException("time error: wrong universe or limited dimension");
+    }
+    return $woordDatum; //timestamp of day
 }

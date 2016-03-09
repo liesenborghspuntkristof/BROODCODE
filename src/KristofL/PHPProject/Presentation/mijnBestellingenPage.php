@@ -21,7 +21,7 @@ namespace KristofL\PHPProject\Presentation;
                     ?>
                 </td>
                 <td rowspan="2">
-                    <form action="winkelen.php?action=herbestelling" method="post">
+                    <form action="mijnbestellingen.php?action=herbestelling&key=<?php echo $key; ?>&id=<?php echo $bestelling->getBestellingId(); ?>" method="post">
                         <select name="herbestellingsdatum">
                             <option>Beschikbare herbestelling datum</option>                  
                             <?php if ($winkelwagen->getBestellingMorgen()->getBestellingId() == null) { ?>

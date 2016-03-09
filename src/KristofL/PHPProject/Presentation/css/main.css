@@ -118,7 +118,9 @@ and open the template in the editor.
     font-weight: bolder;
 }
 
-
+.highlight {
+    background-color: yellow; 
+}
 
 /************ mobile first **********/
 

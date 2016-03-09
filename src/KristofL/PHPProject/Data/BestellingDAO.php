@@ -77,7 +77,7 @@ class BestellingDAO {
         $rij = $stmt->fetch(PDO::FETCH_ASSOC);
         $klantDAO = new KlantDAO();
         $klant = $klantDAO->getByEmailadres($emailadres);
-        $bestelling = Bestelling::create($rij["bestellingID"], $datum, $klant, $rij["afgehaald"], $rij["referentie"], $rij["bevestigd"]);
+        $bestelling = Bestelling::create($rij["bestellingID"], $datum, $klant, $rij["afgehaald"], $rij["referentie"], $rij["bevestigd"]);  
         $dbh = null;
         return $bestelling;
     }
@@ -112,6 +112,14 @@ class BestellingDAO {
         $stmt = $dbh->prepare($sql);
         $stmt->execute(array(':bestellingID' => $bestellingId));
         $dbh = null;
+    }
+    
+    public function deleteBestellingById($bestellingId) {
+        $sql= "DELETE bestellingen, bestellijnen FROM bestellingen, bestellijnen WHERE bestellingen.bestellingID = bestellijnen.bestellingID AND bestellingen.bestellingID = :bestellingID";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(array(':bestellingID' => $bestellingId));
+        $dbh = null;       
     }
     
 }

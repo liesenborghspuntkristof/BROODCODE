@@ -219,31 +219,77 @@ require_once 'algemeneFuncties.php';
 //    }
 //} 
 
+//echo $_SERVER['PHP_SELF'];
 
 
-$date = "vandaag"; 
+//$bestellingDAO = new BestellingDAO();
+//$bestel = $bestellingDAO->getByDateFromId("liesenborghs.kristof@gmail.com", "2016-03-15"); 
+//var_dump($bestel); 
+
+if (isset($_GET["date"])) {
+    echo filter_input(INPUT_GET, "date", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+}
+
+echo "</br></br> <-------------------------------------------------------> </br></br>";
+
+echo "<br>";
+
+$date = "overmorgen"; 
 try {
-    $tijd = interpreteerDate($date);
+    $tijd = interpreteerGETDate($date);
     echo $tijd . "</br>"; 
 } catch (FunctionException $ex) {
     echo "foutje" . "</br>";
 }
+$Ymd = date ("Y-m-d", $tijd); 
+echo $Ymd . "</br>"; 
+try {
+    $datumwoord = DatumNaarWoord($Ymd); 
+    echo $datumwoord . "</br>"; 
+} catch (FunctionException $ex) {
+    echo "foutje" . "</br>";
+}
+
+$bestellingSvc = new \KristofL\PHPProject\Business\BestellingService(); 
+$winkelwagen = $bestellingSvc->createWinkelwagen("liesenborghs.kristof@gmail.com"); 
+echo "</br></br> <-------------------------------------------------------> </br></br>";
+
+
+ 
+switch ($Ymd) {
+        case $winkelwagen->getAfhalingVandaag()->getAfhaaldatum():
+            $bestelling = $winkelwagen->getAfhalingVandaag()->getAfhaaldatum(); //obj. bestelling datum van vandaag;
+            break;
+        case $winkelwagen->getBestellingMorgen()->getAfhaaldatum():
+            $bestelling = $winkelwagen->getBestellingMorgen()->getAfhaaldatum(); //obj. bestelling datum van morgen;
+            break;
+        case $winkelwagen->getBestellingOvermorgen()->getAfhaaldatum():
+            $bestelling = $winkelwagen->getBestellingOvermorgen()->getAfhaaldatum(); //obj. bestelling datum van overmorgen;
+            break;
+        case $winkelwagen->getBestellingOverovermorgen()->getAfhaaldatum():
+            $bestelling = $winkelwagen->getBestellingOverovermorgen()->getAfhaaldatum(); //obj. bestelling datum van overovermorgen;
+            break;
+        default:
+            $bestelling = "failure"; 
+            break;
+    }
+    echo $bestelling . "</br>";  
 
 
 
 
 
-
-$time = date("U", strtotime("now")); 
-echo $time . "</br>"; 
-echo date("Y-m-d", $time); 
-
-$bestellingDAO = new BestellingDAO();
-$bestelling = $bestellingDAO->getById(1); 
-
-$bestellijnSvc = new BestellijnService(); 
-$bestelbon = $bestellijnSvc->getBestelbon($bestelling); 
-
-var_dump (current($bestelbon)->getBestelling()->getBevestigd()); 
-
-include_once 'src/KristofL/PHPProject/Presentation/bestelbonPage.php'; 
+//
+//$time = date("U", strtotime("now")); 
+//echo $time . "</br>"; 
+//echo date("Y-m-d", $time); 
+//
+//$bestellingDAO = new BestellingDAO();
+//$bestelling = $bestellingDAO->getById(1); 
+//
+//$bestellijnSvc = new BestellijnService(); 
+//$bestelbon = $bestellijnSvc->getBestelbon($bestelling); 
+//
+//var_dump (current($bestelbon)->getBestelling()->getBevestigd()); 
+//
+//include_once 'src/KristofL/PHPProject/Presentation/bestelbonPage.php'; 

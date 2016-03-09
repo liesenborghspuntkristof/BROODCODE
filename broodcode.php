@@ -19,7 +19,7 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
     if (isset($_SESSION["winkelwagen"]) && isset($_GET["action"]) && $_GET["action"] == "broodcode" && isset($_GET["date"])) {
         $winkelwagen = unserialize($_SESSION["winkelwagen"]);
         try {
-            $time = interpreteerDate($_GET["date"]);         
+            $time = interpreteerGETDate($_GET["date"]);         
         } catch (FunctionException $ex) {
             $location = "location: winkelwagen.php?msg=" . base64_encode("time error: foutieve 'date' variabel");
             header($location);

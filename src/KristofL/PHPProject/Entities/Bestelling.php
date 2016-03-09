@@ -35,9 +35,7 @@ class Bestelling {
     }
     
     public static function create($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie, $bevestigd) {
-        if (!isset(self::$idMap[$bestellingId])) {
-            self::$idMap[$bestellingId] = new Bestelling($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie, $bevestigd); 
-        }
+        self::$idMap[$bestellingId] = new Bestelling($bestellingId, $afhaaldatum, $klant, $afgehaald, $referentie, $bevestigd); //idMap == disabled <-> $bestellingId kan meermaal null zijn
         return self::$idMap[$bestellingId];
     }
 
