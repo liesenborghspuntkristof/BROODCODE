@@ -230,10 +230,13 @@ if (isset($_GET["date"])) {
     echo filter_input(INPUT_GET, "date", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 }
 
+  
+
+
 echo "</br></br> <-------------------------------------------------------> </br></br>";
 
 echo "<br>";
-
+echo strtotime("2016-03-12") . "</br>"; 
 $date = "overmorgen"; 
 try {
     $tijd = interpreteerGETDate($date);
@@ -242,6 +245,7 @@ try {
     echo "foutje" . "</br>";
 }
 $Ymd = date ("Y-m-d", $tijd); 
+//$Ymd = date("Y-m-d", strtotime("2016-03-12")); 
 echo $Ymd . "</br>"; 
 try {
     $datumwoord = DatumNaarWoord($Ymd); 

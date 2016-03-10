@@ -68,15 +68,21 @@ class BestellingService {
     
     public function setTempBestelling($klant, $afhaaldatum, $tempBestellijnen) {
         $bestellingDAO = new BestellingDAO();
+        $checklist = $bestellingDAO->getByKlant($klant); 
+        foreach ($checklist as $check) {
+            if ($check->getAfhaaldatum() == $afhaaldatum && $check->getBevestigd()) {
+                throw new BestellingException ("Op deze datum is reeds een bestelling genoteerd"); 
+            }
+        }
         $bestellingDAO->setTempBestelling($afhaaldatum, $klant->getEmailadres()); 
         $bestelling = $bestellingDAO->getByDateFromId($klant->getEmailadres(), $afhaaldatum); 
         $bestellijnSvc = new BestellijnService();
         $bestellijnSvc->setBestellijnen($bestelling, $tempBestellijnen); 
-//        $tempBestelbon = $bestellijnSvc->getBestelbon($bestelling); 
-//        return $tempBestelbon; 
     }
     
     public function updateBestelling($bestelling, $tempBestellijnen) {
+        $bestellingDAO = new BestellingDAO();
+        $bestellingDAO->resetConfirmation($bestelling->getBestellingId()); // bij update moet opnieuw de bestelling bevestigd worden
         $bestellijnSvc = new BestellijnService();
         $bestellijnSvc->deleteBestellijnen($bestelling); 
         $bestellijnSvc->setBestellijnen($bestelling, $tempBestellijnen); 

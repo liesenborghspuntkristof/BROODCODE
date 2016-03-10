@@ -4,7 +4,7 @@
 namespace KristofL\PHPProject\Presentation;
 ?>
 
-<?php if (isset($_GET["action"]) && $_GET["action"] !== "wijzig") { ?>
+<?php if ($bestellinglijst && $_GET["action"] !== "wijzig") { ?>
     <div class="centerBox">
         <form action="winkelen.php?action=herbestelling&date=<?php echo filter_input(INPUT_GET, "date", FILTER_SANITIZE_FULL_SPECIAL_CHARS); ?>" method="post">
             <div class="boxRij">

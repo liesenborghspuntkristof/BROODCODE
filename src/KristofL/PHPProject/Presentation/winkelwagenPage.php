@@ -12,14 +12,14 @@ namespace KristofL\PHPProject\Presentation;
     <tbody>
         <tr>
             <td <?php
-            if ($winkelwagen->getAfhalingVandaag()->getBestellingId() !== null && $winkelwagen->getAfhalingVandaag()->getBevestigd()) {
+            if ($winkelwagen->getAfhalingVandaag()->getBestellingId() !== null && $winkelwagen->getAfhalingVandaag()->getBevestigd() && $winkelwagen->getAfhalingVandaag()->getAfgehaald() == 0) {
                 echo 'rowspan="2"';
             }
             ?>>
                 Afhaling, vandaag [<?php echo date("Y-m-d"); ?>]
                 <?php
                 if ($winkelwagen->getAfhalingVandaag()->getBestellingId() !== null && $winkelwagen->getAfhalingVandaag()->getBevestigd() && isset($_GET["action"]) && $_GET["action"] == "expand" && isset($_GET["date"]) && $_GET["date"] == "vandaag") {
-                    echo "<a href='winkelwagen.php?'><i class='fa fa-caret-square-o-up'></i></a>";
+                    echo "<a href='winkelwagen.php'><i class='fa fa-caret-square-o-up'></i></a>";
                 } elseif ($winkelwagen->getAfhalingVandaag()->getBestellingId() !== null && $winkelwagen->getAfhalingVandaag()->getBevestigd()) {
                     ?>
                     <a href="winkelwagen.php?action=expand&date=vandaag"><i class="fa fa-caret-square-o-down"></i></a>
@@ -27,19 +27,23 @@ namespace KristofL\PHPProject\Presentation;
                 }
                 ?>
             </td>
-            <?php if ($winkelwagen->getAfhalingVandaag()->getBestellingId() !== null && $winkelwagen->getAfhalingVandaag()->getBevestigd()) { ?>
+            <?php if ($winkelwagen->getAfhalingVandaag()->getBestellingId() !== null && $winkelwagen->getAfhalingVandaag()->getBevestigd() && $winkelwagen->getAfhalingVandaag()->getAfgehaald() == 0) { ?>
                 <td colspan="2">
                     <?php if ($winkelwagen->getAfhalingVandaag()->getAfgehaald() == 0) { ?>
                         U heeft een bestelling om vandaag af te halen
-                    <?php } else { ?>
-                        uw bestelling van vandaag is al afgehaald
                     <?php } ?>
                 </td>
             </tr>
             <tr colspan="2">
                 <td colspan="2"><a href="broodcode.php?action=broodcode&date=vandaag">Krijg BroodCode</a></td>         
             <?php } else { ?>
-                <td colspan ="2">Geen afhaling</td>
+                <td colspan ="2">
+                <?php if ($winkelwagen->getAfhalingVandaag()->getAfgehaald() == 1) { ?>
+                    uw bestelling van vandaag is al afgehaald
+                    <?php } else { ?>
+                    Geen afhaling
+                <?php } ?>
+                </td>
             <?php } ?>
         </tr>
         <?php

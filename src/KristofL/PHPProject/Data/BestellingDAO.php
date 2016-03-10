@@ -98,6 +98,14 @@ class BestellingDAO {
         $dbh = null;
     }
     
+    public function resetConfirmation($bestellingId) {
+        $sql = "UPDATE bestellingen SET bevestigd = FALSE WHERE bestellingID = :bestellingID";
+        $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);
+        $stmt = $dbh->prepare($sql);
+        $stmt->execute(array(':bestellingID' => $bestellingId));
+        $dbh = null;      
+    }
+    
     public function updateBestellingReferentie($bestellingId, $referentie) {
         $sql = "UPDATE bestellingen SET referentie = :referentie WHERE bestellingID = :bestellingID";
         $dbh = new PDO(DBConfig::$DB_CONNSTRING, DBConfig::$DB_USERNAME, DBConfig::$DB_PASSWORD);

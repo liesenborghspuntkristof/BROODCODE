@@ -122,16 +122,6 @@ and open the template in the editor.
     background-color: yellow; 
 }
 
-html {
-    box-sizing: border-box; 
-}
-
-body {
-    margin: 0; 
-    font-family: sans-serif; 
-    position: relative; 
-}
-
 /************ mobile first **********/
 
 /**** responsive switches ***/
@@ -142,6 +132,7 @@ body {
 .xxl_on {display: none;}
 
 .xs_on {display: block;}
+.xs_off {display: none;}
 /*****        end        ****/
 
 [class*="kol-"] {
@@ -150,7 +141,15 @@ body {
 
 
 
+html {
+    box-sizing: border-box; 
+}
 
+body {
+    margin: 0; 
+    font-family: sans-serif; 
+    position: relative; 
+}
 
 #redirect {
     width: 100vmin; 
@@ -199,15 +198,14 @@ span.fixed {
     font-family: detourdork, sans-serif; 
     font-size: 1.5em; 
     margin-top: calc(5em/2 - 1.5em); 
-    margin-bottom: 1em;
 }
 
 header.midden, footer.midden {
     text-align: center;
 }
 
-footer.midden {
-    font-size: 4vw;
+header.midden, footer.midden {
+    text-align: center;
 }
 
 header {
@@ -215,7 +213,7 @@ header {
     position: fixed; 
     top: 0; 
     width: 100vw; 
-    height: 74px;    
+    height: 5em;    
     background-color: #7F9799; 
     font-family: ddork; 
     z-index: 50; 
@@ -223,7 +221,7 @@ header {
 
 #topPijl {
     position: fixed; 
-    top: 74px;
+    top: 5em;
     left: calc(50% - 20px);  
     right: calc(50% - 20px);  
     border-top: 20px solid #7F9799; 
@@ -239,12 +237,12 @@ header {
     display: block; 
     position: fixed; 
     margin: 0; 
-    top: 120px; 
+    top: 110px; 
     bottom: auto; 
     left: 10%;
     right: 10%; 
     font-family: woodcutterbarcode; 
-    font-size: 45vw; 
+    font-size: 15vh; 
 
 }
 
@@ -266,17 +264,15 @@ header {
 }
 
 #broodlift {
-
-    height: 100vh;  
+    margin-top: 5em; 
+    height: calc(100vmin - 10em - 20px);  
     text-align: center; 
     display: block; 
     /*    background-image: url("../img/automaat3.jpg"); 
         background-repeat: no-repeat; 
         background-position: center; 
         background-size: 75%; */
-
-    background-image: url("../img/backgroundBreadv4.jpg");
-    background-size: 100%;
+    position: relative; 
 }
 
 #automaat {
@@ -292,7 +288,7 @@ header {
     left: 10%; 
     right: 10%; 
     font-family: detourdork; 
-    font-size: 8vw; 
+    font-size: 5vh; 
 
 }
 
@@ -307,7 +303,7 @@ header {
 
 #bodemPijl {
     position: fixed; 
-    bottom: 74px;
+    bottom: 5em;
     left: calc(50% - 20px); 
     right: calc(50% - 20px);      
     border-bottom: 20px solid #7F9799; 
@@ -322,7 +318,7 @@ footer {
     position: fixed; 
     bottom: 0; 
     width: 100vw; 
-    height: 74px; 
+    height: 5em; 
     background-color: #7F9799;
 }
 

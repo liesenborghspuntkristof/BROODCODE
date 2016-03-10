@@ -44,6 +44,8 @@ if (!isset($_SESSION["login"]) || $_SESSION["login"] !== "valid login" || !isset
                 exit(0);
                 break;
         }
+    }
+    if ($bestelling->getBevestigd()) {
         include_once 'src/KristofL/PHPProject/Presentation/header_logedin.php';
         include_once 'src/KristofL/PHPProject/Presentation/broodcodePage.php';
         include_once 'src/KristofL/PHPProject/Presentation/footer.php';

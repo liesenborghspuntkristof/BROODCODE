@@ -70,14 +70,19 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
 
     switch ($_GET["action"]) {
         case "winkelen":
+            if ($bestelling->getBestellingId() == null ) {
             $bestellinglijst = $bestellingSvc->getBestellingenByKlant($klant);
             $productenlijstByCategorie = $productSvc->getProductListByCategorieList();                    
             if (isset($_GET["msg"])) { echo base64_decode($_GET["msg"]); }
-            include_once 'src/KristofL/PHPProject/Presentation/winkelForm.php';          
+            include_once 'src/KristofL/PHPProject/Presentation/winkelForm.php';
+            } else {
+                header("location: winkelwagen.php");
+                exit(0);               
+            }
             break;
             
         case "bestelling":
-            if (isset($_POST)) {
+            if (isset($_POST) && $_GET["date"] !== 'vandaag' && $_GET["date"] == $GETtime) {
                 $productlijst = $productSvc->getProductList();
                 $tempBestellijnen = array();
                 foreach ($productlijst as $product) {
@@ -87,7 +92,7 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                             $tempBestellijnen = array_replace($tempBestellijnen, $tempBestellijn);
                         }
                     } else {
-                        $location = "location: winkelen.php?msg=" . base64_encode("foutieve invoer, gelieve de waarde niet te manipuleren");
+                        $location = "location: winkelen.php?action=winkelen&date=" . $GETtime . "msg=" . base64_encode("foutieve invoer, gelieve de waarde niet te manipuleren");
                         header($location);
                         exit(0);
                     }
@@ -100,11 +105,15 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                 $location = "location: winkelen.php?action=bevestig&date=" . $GETtime;
                 header($location);
                 exit(0);           
+            } else {
+                $location = "location: winkelen.php?action=winkelen&date=" . $GETtime;
+                header($location);
+                exit(0);
             }
             break; 
             
         case "bevestig":
-            if (isset($_GET["button"]) && $_GET["button"] == "bevestig" && $bestelling->getBevestigd() == FALSE && $_GET["date"] !== "vandaag") {
+            if (isset($_GET["button"]) && $_GET["button"] == "bevestig" && $bestelling->getBevestigd() == FALSE && $_GET["date"] !== "vandaag" && $_GET["date"] == $GETtime) {
                 if (check_valid_input(noSpace(latin_to_ascii($_POST["referentie"])), 0, 160)) {
                     $bestelling->setReferentie($_POST["referentie"]); 
                     $bestellingSvc->updateReferentie($bestelling); 
@@ -113,7 +122,7 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                 $bestellingSvc->confirmBestelbon($bestelbon);
                 header("location: winkelwagen.php");
                 exit(0);
-            } elseif ($bestelling->getBestellingId() !== NULL && $bestelling->getBevestigd() == FALSE && $_GET["date"] !== "vandaag") {
+            } elseif ($bestelling->getBestellingId() !== NULL && $bestelling->getBevestigd() == FALSE && $_GET["date"] !== "vandaag" && $_GET["date"] == $GETtime) {
                 $bestelbon = $bestellijnSvc->getBestelbon($bestelling); 
                 include_once 'src/KristofL/PHPProject/Presentation/bestelbonPage.php';
                 include_once 'src/KristofL/PHPProject/Presentation/bestelbonForm.php';
@@ -125,8 +134,22 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
             
         case "herbestelling":
             if (isset($_POST["bestellingId"]) && check_only_numbers($_POST["bestellingId"])) {
+                $herbestellingId = $_POST["bestellingId"]; 
+            } elseif (isset($_SESSION["herbestellingId"]) && check_only_numbers($_SESSION["herbestellingId"])) {
+                $herbestellingId = $_SESSION["herbestellingId"]; 
+                unset($_SESSION["herbestellingId"]); 
+            } else {
+                if (isset($_SESSION["herbestelling"])) {
+                    header("location: mijnbestellingen.php");
+                    exit(0);
+                } else {
+                    $location = "location: winkelen.php?action=winkelen&date=" . $GETtime;
+                    header($location);
+                    exit(0);
+                }
+            }
                 try {
-                    $herbestelling = $bestellingSvc->getBestellingByklantAndId($klant, $_POST["bestellingId"]);                 
+                    $herbestelling = $bestellingSvc->getBestellingByklantAndId($klant, $herbestellingId);                 
                 } catch (BestellingException $ex) {
                     $location = "location: winkelen.php?action=winkelen&date=" . $GETtime . "&msg=" . base64_encode("foutieve invoer, gelieve de waarde niet te manipuleren") . base64_encode("</br>" . $ex->getMessage());
                     header($location);
@@ -134,7 +157,13 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                 }
                 if ($herbestelling->getBevestigd()) {
                     $tempBestellijnen = $bestellijnSvc->getTempBestellijnen($herbestelling);
-                    $bestellingSvc->setTempBestelling($klant, $GETtime, $tempBestellijnen);
+                    try {
+                        $bestellingSvc->setTempBestelling($klant, $date, $tempBestellijnen);                   
+                    } catch (BestellingException $ex) {
+                        $location = "location: winkelwagen.php?msg=" . base64_encode($ex->getMessage() . "</br>Klik in de rij van " . $GETtime . " op 'bestelling wijzigen' om te wijzigen" );
+                        header($location);
+                        exit(0);
+                    }                  
                     $location = "location: winkelen.php?action=bevestig&date=" . $GETtime;
                     header($location);
                     exit(0);
@@ -143,7 +172,6 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                     header($location);
                     exit(0);
                 }               
-            }
             break;
             
         case "wijzig": 
@@ -171,6 +199,9 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
                 echo "<p style='margin-top: 8em;'>Klik nogmaals op 'Annuleer bestelling' om onderstaande bestelling te verwijderen</p>"; 
                 echo "<center><a href='winkelen.php?action=annuleer&date=" . $GETtime . "&button=annuleer'>Annuleer bestelling</a></center>"; 
                 include_once 'src/KristofL/PHPProject/Presentation/bestelbonPage.php';
+            } else {
+                header("location: winkelwagen.php");
+                exit(0);
             }
             
             break; 

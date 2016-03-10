@@ -23,9 +23,9 @@ and open the template in the editor.
             <a class="redyellow LP" href="index.php?GO=login"><span class="fixed">Plaats een order</span></a>
         </header>
         <div id="topPijl"></div>
-        <section id="broodlift">
+        <section id="broodlift" class="clearFix">
             <span class="redpetrol" id="logoLP">BroodCode</span>
-            <img id="automaat" src="src/KristofL/PHPProject/Presentation/img/automaat3.jpg"/>
+            <img class="md_on lg_on xl_on xxl_on" id="automaat" src="src/KristofL/PHPProject/Presentation/img/automaat3.jpg"/>
             <span class="redpetrol" id="sloganLP">Ons brood zit in de lift</span>
         </section>
         <div id="bodemPijl"></div>
