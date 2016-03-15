@@ -3,7 +3,8 @@
 
 namespace KristofL\PHPProject\Presentation;
 ?>
-<img id="vitrine" src="src/KristofL/PHPProject/Presentation/img/vitrine.jpg"/>
+<div class="centerfold clearFix">
+<img id="vitrine" class="md_on lg_on xl_on xxl_on" src="src/KristofL/PHPProject/Presentation/img/vitrine.jpg"/>
 <form id="nieuw" method="post" action="login.php?action=new">
     <h1 class="redpetrol">Maak een account aan</h1>
     <input type="email" placeholder="emailadres" required="" name="emailadres" <?php if(isset($_GET["Regmsg"])){ echo "value='" . $emailadres . "'"; } ?>/>
@@ -25,4 +26,5 @@ namespace KristofL\PHPProject\Presentation;
 
 <div id="Regmsg">
     <?php echo $Regmsg; ?>
+</div>
 </div>

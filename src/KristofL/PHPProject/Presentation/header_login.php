@@ -19,7 +19,7 @@ and open the template in the editor.
     </head>
     <body>
         <header>
-            <a href="index.php" id="logo"><span class="redyellow">BroodCode</span></a>
+            <a href="index.php" id="logo"><i class="xs_on sm_on fa fa-barcode fa-3x redyellow"></i><span class="md_on lg_on xl_on xxl_on redyellow">BroodCode</span></a>
             <div id="orderButton">
                 <div>
                     <form id="login" method="post" action="login.php?action=login">

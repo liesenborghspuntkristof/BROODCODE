@@ -50,36 +50,7 @@ and open the template in the editor.
     /*outline: red solid 1px;*/
 }
 
-/***** css only fluid width equal height columns **/
 
-#zeecontainer {
-    margin:0; 
-    position:relative;    
-}
-
-.kolom {
-    position:relative; 
-    float:left; 
-    width:31%;   /* 31% = 3 kolommen */
-    margin:5em 1%;  
-    padding:0.5em; 
-}
-
-.achtergrond {
-    position:absolute;
-    width:100%;
-    height:100%;
-
-}
-
-.achtergrond .kolom {
-    height: 100%;
-    background-color:#7F9799 ; 
-}
-
-.wis {
-    clear: both;
-}
 /**** opbouw css only fluid width equal height columns 
 <div id="zeecontainer">
             <div class="achtergrond"> = kleur
@@ -118,6 +89,10 @@ and open the template in the editor.
     font-weight: bolder;
 }
 
+.geel {
+    color: #FAFFAD;
+}
+
 .highlight {
     background-color: yellow; 
 }
@@ -150,7 +125,7 @@ body {
 
 
 
-
+/***** redirect page *****/ 
 
 #redirect {
     width: 100vmin; 
@@ -186,12 +161,516 @@ body {
     margin-top: 15vh; 
     min-height: 50vh; 
 }
-
+/****** einde redirect ******/
+/****** start landig page *****/
 a.LP {
     display: block;
     text-decoration: none;
     width: 100vw; 
-    height: 5em;   
+    height: 74px;   
+}
+
+span.fixed {
+    display: inline-block;  
+    font-family: detourdork, sans-serif; 
+    font-size: 1.5em; 
+    margin-top: calc(5em/2 - 1.5em); 
+    margin-bottom: 1em;
+}
+
+header.midden, footer.midden {
+    text-align: center;
+}
+
+footer.midden {
+    font-size: 4vw;
+}
+
+header {
+    display: block; 
+    position: fixed; 
+    top: 0; 
+    width: 100vw; 
+    height: 74px;    
+    background-color: #7F9799; 
+    font-family: ddork; 
+    z-index: 50; 
+}
+
+#topPijl {
+    position: fixed; 
+    top: 74px;
+    left: calc(50% - 20px);  
+    right: calc(50% - 20px);  
+    border-top: 20px solid #7F9799; 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent;
+    width: 0;
+    height: 0;
+    z-index: 50; 
+
+}
+
+#logoLP {
+    display: block; 
+    position: fixed; 
+    margin: 0; 
+    top: 120px; 
+    bottom: auto; 
+    left: 10%;
+    right: 10%; 
+    font-family: woodcutterbarcode; 
+    font-size: 45vw; 
+
+}
+
+.fa {
+    display: initial; 
+}
+
+#logo {
+    display: inline-block;   
+    height: 74px;
+    width: 25vw; 
+    overflow: hidden; 
+    position: relative; 
+    text-align: center; 
+    text-decoration: none;
+}
+
+
+#logo span {
+    font-family: woodcutterbarcode; 
+    font-size: 10em;
+    bottom: 0; 
+    position: absolute; 
+}
+
+#logo i {   
+    margin: 13px auto;
+
+}
+
+#broodlift {
+
+    height: 100vh;  
+    text-align: center; 
+    display: block; 
+    /*    background-image: url("../img/automaat3.jpg"); 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        background-size: 75%; */
+
+    background-image: url("../img/backgroundBreadv4.jpg");
+    background-size: 100%;
+}
+
+#automaat {
+    width: 95vmin; 
+    margin-top: 20vmin;
+}
+
+
+#sloganLP {
+    display: block; 
+    position: fixed; 
+    bottom: 120px; 
+    left: 10%; 
+    right: 10%; 
+    font-family: detourdork; 
+    font-size: 8vw; 
+
+}
+
+#slogan { 
+    float: left; 
+    font-family: detourdork; 
+    font-size: 2em; 
+    margin-top: calc(5em/2 - 1.55em); 
+    margin-left: 0.5em; 
+}
+
+
+#bodemPijl {
+    position: fixed; 
+    bottom: 74px;
+    left: calc(50% - 20px); 
+    right: calc(50% - 20px);      
+    border-bottom: 20px solid #7F9799; 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent;
+    width: 0;
+    height: 0;
+}
+
+footer {
+    display: block; 
+    position: fixed; 
+    bottom: 0; 
+    width: 100vw; 
+    height: 74px; 
+    background-color: #7F9799;
+}
+
+.centerfold {
+    height: calc(100vh+94px);
+    width: 100vw;
+    padding: 110px 0; 
+    display: block; 
+    position: relative;
+    background-image: url("../img/backgroundBreadv4.jpg");
+    background-size: 100%;
+}
+
+.wrapper {
+    width: 90vw; 
+    margin: 0 auto;
+}
+
+#orderButton {
+    float: right;
+    display: block; 
+    height: 74px; 
+    width: 75vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center;
+    z-index: 50; 
+}
+
+
+#orderButton div {
+    display: inline-block; 
+    margin: 3.6px 3.6px;
+}
+#orderButton a {
+    display: inline;  
+}
+
+#orderButtonLogedin {
+    float: right;
+    display: block; 
+    height: 74px; 
+    width: 75vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center;
+    z-index: 50; 
+    padding: 9px 9px;
+}
+
+#orderButtonLogedin div {
+    display: inline-block; 
+    margin: 3.6px 3.6px;
+}
+
+#orderButtonLogedout {
+    float: right;
+    display: block; 
+    height: 74px; 
+    width: 75vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1.5em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center;
+    z-index: 50; 
+    padding: 9px 9px;
+}
+
+#orderButtonLogedout div {
+    display: inline-block; 
+    margin: 12px auto;
+    width: 100%;
+    height: 100%;
+}
+
+#orderButtonLogedout div a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    margin-top: 0.5em;
+}
+
+#logout {
+    display: inline-block;
+}
+
+#logout input[type="submit"] {
+    border-radius: 0.2em; 
+    border: 1px outset #3B5450 ;
+    background-color: #E30304;
+    color: #FAFFAD;
+    font-weight: bold;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+}
+
+
+#infoButton {
+    float: right;
+    display: block; 
+    height: 74px; 
+    width: 100vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1.3em;
+    text-decoration: none; 
+    text-align: center; 
+}
+
+#infoButton span {
+    display: inline-block;  
+    font-family: detourdork, sans-serif; 
+    margin-top: 1em;  
+}
+
+input:focus {background-color: #FAFFAD ;}
+
+#login { 
+    text-align: right;
+}
+
+#login input {
+    width: 100%;
+    text-align: center;
+}
+
+#login input[type="submit"] {
+    border-radius: 0.2em; 
+    border: 1px outset #3B5450 ;
+    background-color: #E30304;
+    color: #FAFFAD;
+    font-weight: bold;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#nieuw {
+    /*    border: 1px solid black;*/
+    display: block;
+    margin: 0 auto;
+    color: #585858; 
+    text-align: center;
+}
+
+#nieuw h1 {
+    text-align: center; 
+}
+
+#nieuw input, #nieuw select {
+    display: block;
+    margin: 1em auto;
+    width: 90vw;
+    text-align: center;
+    padding: 0.5em;
+    color: #585858;
+}
+
+#nieuw input[type="submit"] {
+    border-radius: 0.2em; 
+    border: 1px outset #533E29;
+    background-color: #7F9799;
+    width: 90vw;
+    font-weight: bold;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#nieuw select option:first-child{opacity: 0.7; color: red;}
+
+#vitrine {
+    float: left; 
+    width: 50vw; 
+    margin: 8.9em 3em ; 
+}
+
+#loginmsg {
+    color: #FAFFAD; 
+    float: left;    
+    font-family: sans-serif;
+    font-size: 1em; 
+}
+
+.aboutkolom {
+    color: #533E29;
+    background-color:white ;
+    margin: 1em auto; 
+    padding: 1em; 
+}
+
+#Regmsg {
+    color: #E30304; 
+    float: left;
+    width: 40vw; 
+    text-align: center;   
+    font-family: sans-serif;
+    font-size: 1em; 
+}
+
+table.mijnAccount:first-of-type {
+    margin-top: 8em; 
+}
+
+.mijnAccount, .mijnAccount tr, .mijnAccount td {
+    border-collapse: separate; 
+    border: 1px solid black; 
+}
+
+
+.mijnAccount td {padding: 0.5em 2em;}
+.mijnAccount tr td:first-child {width: 30vw;}
+.mijnAccount tfoot td {text-align: right;}
+
+.mijnAccount {
+    margin: 2em auto; 
+    width: 80vw; 
+}
+
+.mijnAccount form input, .mijnAccount form select {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0; 
+}
+
+.mijnAccount form input:last-of-type {
+    float: right; 
+    width: 40%;
+}
+
+.centerBox {
+    width: 80vw;
+    margin: 8em auto; 
+    position: relative; 
+    cursor: default; 
+}
+.boxRij {
+    display: block; 
+    width: 100%;
+    border: 1px solid black; 
+}
+.product {
+    display: inline-block; 
+    width: 50%; 
+}
+.prijs, 
+.hoeveelheid {
+    display: inline-block; 
+    width: 20%; 
+}
+
+.product, 
+.prijs,
+.hoeveelheid {
+/*    border: 1px solid black;*/
+    margin: 0; 
+    padding: 0.5em 2em; 
+}
+
+
+
+/*********** phablet ***********//* sm (small)=@media screen and (min-width:361px) */
+@media screen and (min-width:405px){
+
+    /**** responsive switches ***/
+    .xs_on {display: none;}
+    .md_on {display: none;}
+    .lg_on {display: none;}
+    .xl_on {display: none;}
+    .xxl_on {display: none;}
+
+    .sm_on {display: block;}
+    /*****        end        ****/
+
+    .kol-sm-1 {width: 8.33%;}
+    .kol-sm-2 {width: 16.66%;}
+    .kol-sm-3 {width: 25%;}
+    .kol-sm-4 {width: 33.33%;}
+    .kol-sm-5 {width: 41.66%;}
+    .kol-sm-6 {width: 50%;}
+    .kol-sm-7 {width: 58.33%;}
+    .kol-sm-8 {width: 66.66%;}
+    .kol-sm-9 {width: 75%;}
+    .kol-sm-10 {width: 83.33%;}
+    .kol-sm-11 {width: 91.66%;}
+    .kol-sm-12 {width: 100%;}
+
+}
+
+/*********** tablet ***********//* md (medium)=@media screen and (min-width:599px) */
+
+@media screen and (min-width:599px){
+
+    /**** responsive switches ***/
+    .xs_on {display: none;}
+    .sm_on {display: none;}
+    .lg_on {display: none;}
+    .xl_on {display: none;}
+    .xxl_on {display: none;}
+
+    .md_on {display: block;}
+    /*****        end        ****/
+
+    .kol-md-1 {width: 8.33%;}
+    .kol-md-2 {width: 16.66%;}
+    .kol-md-3 {width: 25%;}
+    .kol-md-4 {width: 33.33%;}
+    .kol-md-5 {width: 41.66%;}
+    .kol-md-6 {width: 50%;}
+    .kol-md-7 {width: 58.33%;}
+    .kol-md-8 {width: 66.66%;}
+    .kol-md-9 {width: 75%;}
+    .kol-md-10 {width: 83.33%;}
+    .kol-md-11 {width: 91.66%;}
+    .kol-md-12 {width: 100%;}
+
+    /***** redirect page *****/ 
+
+#redirect {
+    width: 100vmin; 
+    margin: 2em auto;
+    vertical-align: central; 
+}
+
+#redirect img {
+    width: 40vmin;
+    vertical-align: central; 
+    float: left; 
+}
+
+#linkspijl {  
+    display: inline-block;  
+    border-right: 3vmin solid #7F9799; 
+    border-top: 3vmin solid transparent; 
+    border-bottom: 3vmin solid transparent;
+    width: 0;
+    height: 0;
+    vertical-align: central; 
+    float: left; 
+    margin-top: 45vh; 
+}
+
+#redirect article {
+    display: inline-block; 
+    width: 50vmin;
+    vertical-align: central;
+    background-color: #7F9799; 
+    padding: 1em; 
+    float: left; 
+    margin-top: 15vh; 
+    min-height: 50vh; 
+}
+/****** einde redirect ******/
+/****** start landig page *****/
+a.LP {
+    display: block;
+    text-decoration: none;
+    width: 100vw; 
+    height: 74px;   
 }
 
 span.fixed {
@@ -504,62 +983,34 @@ table.mijnAccount:first-of-type {
     padding: 0.5em 2em; 
 }
 
-/*********** phablet ***********//* sm (small)=@media screen and (min-width:361px) */
-@media screen and (min-width:405px){
+#zeecontainer {
+    margin:0; 
+    position:relative;    
+}
 
-    /**** responsive switches ***/
-    .xs_on {display: none;}
-    .md_on {display: none;}
-    .lg_on {display: none;}
-    .xl_on {display: none;}
-    .xxl_on {display: none;}
+.kolom {
+    position:relative; 
+    float:left; 
+    width:31%;   /* 31% = 3 kolommen */
+    margin:5em 1%;  
+    padding:0.5em; 
+}
 
-    .sm_on {display: block;}
-    /*****        end        ****/
-
-    .kol-sm-1 {width: 8.33%;}
-    .kol-sm-2 {width: 16.66%;}
-    .kol-sm-3 {width: 25%;}
-    .kol-sm-4 {width: 33.33%;}
-    .kol-sm-5 {width: 41.66%;}
-    .kol-sm-6 {width: 50%;}
-    .kol-sm-7 {width: 58.33%;}
-    .kol-sm-8 {width: 66.66%;}
-    .kol-sm-9 {width: 75%;}
-    .kol-sm-10 {width: 83.33%;}
-    .kol-sm-11 {width: 91.66%;}
-    .kol-sm-12 {width: 100%;}
+.achtergrond {
+    position:absolute;
+    width:100%;
+    height:100%;
 
 }
 
-/*********** tablet ***********//* md (medium)=@media screen and (min-width:599px) */
+.achtergrond .kolom {
+    height: 100%;
+    background-color:#7F9799 ; 
+}
 
-@media screen and (min-width:599px){
-
-    /**** responsive switches ***/
-    .xs_on {display: none;}
-    .sm_on {display: none;}
-    .lg_on {display: none;}
-    .xl_on {display: none;}
-    .xxl_on {display: none;}
-
-    .md_on {display: block;}
-    /*****        end        ****/
-
-    .kol-md-1 {width: 8.33%;}
-    .kol-md-2 {width: 16.66%;}
-    .kol-md-3 {width: 25%;}
-    .kol-md-4 {width: 33.33%;}
-    .kol-md-5 {width: 41.66%;}
-    .kol-md-6 {width: 50%;}
-    .kol-md-7 {width: 58.33%;}
-    .kol-md-8 {width: 66.66%;}
-    .kol-md-9 {width: 75%;}
-    .kol-md-10 {width: 83.33%;}
-    .kol-md-11 {width: 91.66%;}
-    .kol-md-12 {width: 100%;}
-
-
+.wis {
+    clear: both;
+}
 }
 
 
