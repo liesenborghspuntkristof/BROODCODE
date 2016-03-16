@@ -21,7 +21,7 @@ namespace KristofL\PHPProject\Presentation;
             </div>
         </form>
         <div class="boxRij">
-            <span class="product">De referentie van vorige bestellingen kunnen bij <a href="mijnBestellingen.php">mijn bestellingen</a> aangepast worden</span>
+            <span class="titel">De referentie van vorige bestellingen kunnen bij <a href="mijnBestellingen.php">mijn bestellingen</a> aangepast worden</span>
         </div>
     </div>
 <?php } ?>
@@ -66,7 +66,7 @@ namespace KristofL\PHPProject\Presentation;
         }
         ?>
         <div class="boxRij">
-            <input type="submit" value="Plaats bestelling">
+            <input class="rechts clearFix" type="submit" value="Plaats bestelling">
         </div>
     </form>
 </div>

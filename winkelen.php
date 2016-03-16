@@ -189,15 +189,15 @@ if (isset($_SESSION["winkelwagen"]) && isset($_GET["date"]) && isset($_GET["acti
             break;
             
         case "annuleer":
-            if (isset($_GET["button"]) && $_GET["button"] == "annuleer" && $bestelling->getBestellingId() !== NULL && $GETtime !== "vandaag" && $_SESSION["annuleer"] == "2") {
+            if (isset($_GET["button"]) && $_GET["button"] == "annuleer" && $bestelling->getBestellingId() !== NULL && $GETtime !== "vandaag" && $_SESSION["annuleer"] >= 2) {
                 $bestellingSvc->annuleerBestelling($bestelling); 
                 header("location: winkelwagen.php");
                 exit(0);
             } elseif ($bestelling->getBestellingId() !== NULL && $GETtime !== "vandaag") {
                 $_SESSION["annuleer"]++; 
                 $bestelbon = $bestellijnSvc->getBestelbon($bestelling); 
-                echo "<p style='margin-top: 8em;'>Klik nogmaals op 'Annuleer bestelling' om onderstaande bestelling te verwijderen</p>"; 
-                echo "<center><a href='winkelen.php?action=annuleer&date=" . $GETtime . "&button=annuleer'>Annuleer bestelling</a></center>"; 
+                echo "<center><p style='margin-top: 8em;'>Klik nogmaals op 'Annuleer bestelling' om onderstaande bestelling te verwijderen</p></center>"; 
+                echo "<center><a class='button' href='winkelen.php?action=annuleer&date=" . $GETtime . "&button=annuleer'>Annuleer bestelling</a></center>"; 
                 include_once 'src/KristofL/PHPProject/Presentation/bestelbonPage.php';
             } else {
                 header("location: winkelwagen.php");

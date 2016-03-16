@@ -3,10 +3,11 @@
 
 namespace KristofL\PHPProject\Presentation;
 ?>
-<table class="mijnAccount">
+<div class="centerfold breadground">
+<table class="mijnWinkelwagen">
     <thead>
         <tr>
-            <th>Winkelwagen</th>
+            <th colspan="2">Winkelwagen</th>
         </tr>
     </thead>
     <tbody>
@@ -155,7 +156,6 @@ namespace KristofL\PHPProject\Presentation;
             if ($winkelwagen->getBestellingOverovermorgen()->getBestellingId() !== null) {
                 if ($winkelwagen->getBestellingOverovermorgen()->getBevestigd()) {
                     ?>
-                    ?>
                     <td colspan="2"><a href="broodcode.php?action=broodcode&date=overovermorgen">Krijg BroodCode</a></td>
                 <?php } else { ?>
                     <td colspan="2"><a href="winkelen.php?action=bevestig&date=overovermorgen">Bevestig bestelling</a></td>
@@ -178,4 +178,5 @@ namespace KristofL\PHPProject\Presentation;
         ?>
     </tbody>
 </table>
+</div>
 

@@ -24,8 +24,8 @@ and open the template in the editor.
         </header>
         <div id="topPijl"></div>
         <section id="broodlift" class="clearFix">
-            <span class="redpetrol" id="logoLP">BroodCode</span>
-            <img class="md_on lg_on xl_on xxl_on" id="automaat" src="src/KristofL/PHPProject/Presentation/img/automaat3.jpg"/>
+            <span class="redpetrol xs_on sm_on" id="logoLP">BroodCode</span>
+            <img class="md_on lg_on xl_on xxl_on" id="automaat" src="src/KristofL/PHPProject/Presentation/img/automaat3.png"/>
             <span class="redpetrol" id="sloganLP">Ons brood zit in de lift</span>
         </section>
         <div id="bodemPijl"></div>

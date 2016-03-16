@@ -5,7 +5,7 @@ namespace KristofL\PHPProject\Presentation;
 ?>
 
 
-<section class="centerfold">
+<section class="centerfold breadground">
     <!--            opbouw css only fluid width equal height columns -->
     <div class="wrapper">
         <div class="rij">

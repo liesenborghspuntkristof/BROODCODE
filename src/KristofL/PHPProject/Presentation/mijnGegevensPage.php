@@ -34,5 +34,5 @@ namespace KristofL\PHPProject\Presentation;
         </tr>
     </tbody>
 </table>
-
+</div>
 

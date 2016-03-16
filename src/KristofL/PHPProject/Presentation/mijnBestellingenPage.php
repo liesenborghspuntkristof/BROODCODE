@@ -3,6 +3,7 @@
 
 namespace KristofL\PHPProject\Presentation;
 ?>
+<div class="centerfold breadground">
 <table class="mijnAccount">
     <thead>
         <tr>
@@ -72,3 +73,4 @@ namespace KristofL\PHPProject\Presentation;
 ?>
 </tbody>
 </table>
+</div>

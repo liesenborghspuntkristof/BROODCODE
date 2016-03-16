@@ -44,3 +44,4 @@ namespace KristofL\PHPProject\Presentation;
         <?php } ?>
     </tbody>
 </table>
+</div>

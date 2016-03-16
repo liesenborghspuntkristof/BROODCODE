@@ -5,6 +5,12 @@ namespace KristofL\PHPProject\Presentation;
 
 $btw = 21;
 ?>
+<?php if (isset($_GET["action"]) && $_GET["action"] == "bevestig" && isset($_GET["date"])) {
+    echo "<div id='bestelbonForm' class='centerfold'>"; 
+} elseif (isset($_GET["action"]) && $_GET["action"] == "annuleer" && isset($_GET["date"])) {
+    echo "<div id='bestelbonForm' class='topCenterfold'>";
+}?>
+<div class="bestelbon">
 <div>
     <p>BroodCode Inc.</p>
     <p>Ernest Claeslaan 42</p>
@@ -97,4 +103,7 @@ $btw = 21;
         ?>
     </tbody>
 </table>
-
+</div>
+<?php if (isset($_GET["action"]) && $_GET["action"] == "annuleer" && isset($_GET["date"])) {
+    echo "</div>";
+}?>

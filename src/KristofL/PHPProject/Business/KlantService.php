@@ -30,7 +30,10 @@ class KlantService {
         if ($klant->getEmailadres() == null) {
             unset($_SESSION["emailadres"]);
             throw new loginException("emailadres staat niet geregistreerd");
-        } 
+        } elseif ($klant->getGeblokkeerd()) {
+            unset($_SESSION["emailadres"]);
+            throw new loginException("U heeft meermaals uw bestelling niet opgehaald, U bent geblokkeerd");
+        }
         switch (TRUE) {
     case strlen($klant->getWachtwoord()) == 64:
         if (passwordEncrypt($klant->getEmailadres(), $wachtwoord) === $klant->getWachtwoord()) {

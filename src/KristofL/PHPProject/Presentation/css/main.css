@@ -107,6 +107,34 @@ body {
     position: relative; 
 }
 
+.center {
+    text-align: center;
+}
+
+.rechts {
+    float: right;
+}
+
+
+.titel {
+    margin: 2em;   
+}
+
+.button {
+    display: block;
+    padding: 0.5em;
+    border-radius: 0.2em;
+    background-color: #E30304; 
+    border: 1px outset #3B5450; 
+    color: #FAFFAD;
+    width: 15em;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold; 
+    margin: 1em;
+}
+
+
 /************ mobile first **********/
 
 /**** responsive switches ***/
@@ -173,8 +201,8 @@ a.LP {
 span.fixed {
     display: inline-block;  
     font-family: detourdork, sans-serif; 
-    font-size: 1.5em; 
-    margin-top: calc(5em/2 - 1.5em); 
+    font-size: 20px; 
+    margin-top: 25px; 
     margin-bottom: 1em;
 }
 
@@ -313,13 +341,25 @@ footer {
 }
 
 .centerfold {
-    height: calc(100vh+94px);
+    min-height: 100vh;
     width: 100vw;
     padding: 110px 0; 
     display: block; 
     position: relative;
+}
+
+.topCenterfold {
+    min-height: 100vh;
+    width: 100vw;
+    padding-bottom: 110px; 
+    display: block; 
+    position: relative;
+}
+
+.breadground {
     background-image: url("../img/backgroundBreadv4.jpg");
     background-size: 100%;
+    background-attachment: fixed;
 }
 
 .wrapper {
@@ -483,8 +523,7 @@ input:focus {background-color: #FAFFAD ;}
 
 #nieuw select option:first-child{opacity: 0.7; color: red;}
 
-#vitrine {
-    float: left; 
+#vitrine { 
     width: 50vw; 
     margin: 8.9em 3em ; 
 }
@@ -512,23 +551,75 @@ input:focus {background-color: #FAFFAD ;}
     font-size: 1em; 
 }
 
-table.mijnAccount:first-of-type {
-    margin-top: 8em; 
+.mijnWinkelwagen, .mijnWinkelwagen tr, .mijnWinkelwagen td {
+    border-collapse: separate; 
+    border: 1px solid black; 
 }
+
+
+.mijnWinkelwagen td {padding: 0.5em 2em; background-color: white;}
+.mijnWinkelwagen tr td:first-child {width: 30vw;}
+.mijnWinkelwagen tfoot td {text-align: right;}
+
+.mijnWinkelwagen {
+    margin: 0 auto; 
+    width: 80vw; 
+    background-color: #7F9799;
+}
+
+.mijnWinkelwagen form input, .mijnWinkelwagen form select {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0; 
+}
+
+.mijnWinkelwagen form input:last-of-type {
+    float: right; 
+    width: 40%;
+}
+
+#bestelbonForm {
+    margin: 0 auto; 
+    width: 80vw;
+}
+
+#bestelbonForm tr, #bestelbonForm td {
+    border-collapse: separate; 
+    border: 1px solid black; 
+}
+
+#bestelbonForm td {padding: 0.5em 2em; background-color: white;}
+#bestelbonForm tr td:first-child {width: 30vw;}
+#bestelbonForm tfoot td {text-align: right;}
 
 .mijnAccount, .mijnAccount tr, .mijnAccount td {
     border-collapse: separate; 
     border: 1px solid black; 
 }
 
+#bestelbonForm form input, #bestelbonForm form select {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0; 
+}
 
-.mijnAccount td {padding: 0.5em 2em;}
+#bestelbonForm form input:last-of-type {
+    float: right; 
+    width: 40%;
+}
+
+.mijnAccount td {padding: 0.5em 2em; background-color: white;}
 .mijnAccount tr td:first-child {width: 30vw;}
-.mijnAccount tfoot td {text-align: right;}
+.mijnAccount tfoot td {text-align: right; 
+                      border-collapse: collapse; 
+                      border: none;
+                      background-color: #7F9799;
+}
 
 .mijnAccount {
-    margin: 2em auto; 
-    width: 80vw; 
+    margin: 1em auto; 
+    width: 80vw;
+    background-color: #7F9799;
 }
 
 .mijnAccount form input, .mijnAccount form select {
@@ -540,6 +631,8 @@ table.mijnAccount:first-of-type {
 .mijnAccount form input:last-of-type {
     float: right; 
     width: 40%;
+    border-collapse: collapse;
+
 }
 
 .centerBox {
@@ -550,6 +643,7 @@ table.mijnAccount:first-of-type {
 }
 .boxRij {
     display: block; 
+    min-height: 2em;
     width: 100%;
     border: 1px solid black; 
 }
@@ -599,6 +693,38 @@ table.mijnAccount:first-of-type {
     .kol-sm-11 {width: 91.66%;}
     .kol-sm-12 {width: 100%;}
 
+    #logoLP {
+    display: block; 
+    position: fixed; 
+    margin: 0; 
+    top: 120px; 
+    bottom: auto; 
+    left: 10%;
+    right: 10%; 
+    font-family: woodcutterbarcode; 
+    font-size: 30vw; 
+
+}
+
+#sloganLP {
+    display: block; 
+    position: fixed; 
+    bottom: 120px; 
+    left: 10%; 
+    right: 10%; 
+    font-family: detourdork; 
+    font-size: 6vw; 
+
+}
+
+span.fixed {
+    display: inline-block;  
+    font-family: detourdork, sans-serif; 
+    font-size: 25px; 
+    margin-top: 25px; 
+    margin-bottom: 1em;
+}
+    
 }
 
 /*********** tablet ***********//* md (medium)=@media screen and (min-width:599px) */
@@ -629,7 +755,17 @@ table.mijnAccount:first-of-type {
     .kol-md-12 {width: 100%;}
 
     /***** redirect page *****/ 
+    
+    
 
+    i.xs_on.sm_on.fa.fa-barcode.fa-3x.redyellow {
+        display: none;
+    }    
+    
+    span#logoLP.redpetrol.xs_on.sm_on {
+        display: none;
+    }
+    
 #redirect {
     width: 100vmin; 
     margin: 2em auto;
@@ -676,8 +812,8 @@ a.LP {
 span.fixed {
     display: inline-block;  
     font-family: detourdork, sans-serif; 
-    font-size: 1.5em; 
-    margin-top: calc(5em/2 - 1.5em); 
+    font-size: 25px; 
+    margin-top: 25px; 
     margin-bottom: 1em;
 }
 
@@ -723,7 +859,7 @@ header {
     left: 10%;
     right: 10%; 
     font-family: woodcutterbarcode; 
-    font-size: 45vw; 
+    font-size: 10vw; 
 
 }
 
@@ -754,24 +890,25 @@ header {
         background-position: center; 
         background-size: 75%; */
 
-    background-image: url("../img/backgroundBreadv4.jpg");
-    background-size: 100%;
+/*    background-image: url("../img/backgroundBreadv4.jpg");
+    background-size: 100%;*/
 }
 
 #automaat {
-    width: 95vmin; 
-    margin-top: 20vmin;
+    margin: 94px auto;
+
+    
 }
 
 
 #sloganLP {
     display: block; 
     position: fixed; 
-    bottom: 120px; 
+    bottom: 100px; 
     left: 10%; 
     right: 10%; 
     font-family: detourdork; 
-    font-size: 8vw; 
+    font-size: 3em; 
 
 }
 
@@ -808,8 +945,8 @@ footer {
 #orderButton {
     float: right;
     display: block; 
-    height: 5em; 
-    width: 40vw; 
+    height: 74px; 
+    width: 45vw; 
     font-family: detourdork, sans-serif; 
     font-size: 1em;
     border-left: 2px solid white; 
@@ -820,43 +957,80 @@ footer {
 
 #orderButton div {
     display: inline-block; 
-    margin-top: calc(5em/2 - 1em);
+
 }
 #orderButton a {
     display: inline;
-    
-    
 }
 
 
 #infoButton {
     float: right;
     display: block; 
-    height: 5em; 
-    width: 40vw; 
+    height: 74px; 
+    width: 45vw; 
     font-family: detourdork, sans-serif; 
-    font-size: 1.5em;
+    font-size: 1.2em;
     border-left: 2px solid white; 
     text-decoration: none; 
     text-align: center; 
 }
 
+#orderButtonLogedin {
+    float: right;
+    display: block; 
+    height: 74px; 
+    width: 45vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center;
+    z-index: 50; 
+    padding: 9px 9px;
+}
+
+#orderButtonLogedin div {
+    display: inline-block; 
+    margin: 3.6px 3.6px;
+}
+
+#orderButtonLogedout {
+    float: right;
+    display: block; 
+    height: 74px; 
+    width: 45vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1.5em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center;
+    z-index: 50; 
+    padding: 9px 9px;
+}
+
+#orderButtonLogedout div {
+    display: inline-block; 
+    margin: 12px auto;
+    width: 100%;
+    height: 100%;
+}
+
+#orderButtonLogedout div a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    margin-top: 0.5em;
+}
+
 #infoButton span {
     display: inline-block; 
-    margin-top: calc(5em/2 - 1.25em); 
+    margin-top: 25px; 
 }
 
 input:focus {background-color: #FAFFAD ;}
 
-#login { 
-    text-align: right;
-}
 
-#login input {
-    width: 10em;
-    text-align: center;
-    padding: 0.2em 0.5em; 
-}
 
 #login input[type="submit"] {
     border-radius: 0.2em; 
@@ -871,20 +1045,19 @@ input:focus {background-color: #FAFFAD ;}
 #nieuw {
     /*    border: 1px solid black;*/
     display: block;
-    float: right; 
-    width: 40vw;
-    margin: 8em auto;
+    margin: 0 auto;
     color: #585858; 
 }
 
 #nieuw h1 {
+    margin-top: 0;
     text-align: center; 
 }
 
 #nieuw input, #nieuw select {
     display: block;
     margin: 1em auto;
-    width: 30em;
+    width: 90%;
     text-align: center;
     padding: 0.5em;
     color: #585858;
@@ -894,7 +1067,7 @@ input:focus {background-color: #FAFFAD ;}
     border-radius: 0.2em; 
     border: 1px outset #533E29;
     background-color: #7F9799;
-    width: 31em;
+    width: 91%;
     font-weight: bold;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -903,9 +1076,10 @@ input:focus {background-color: #FAFFAD ;}
 #nieuw select option:first-child{opacity: 0.7; color: red;}
 
 #vitrine {
-    float: left; 
-    width: 50vw; 
-    margin: 8.9em 3em ; 
+    display: block;
+    margin: 0 auto;
+    width: 75%;
+
 }
 
 #loginmsg {
@@ -925,7 +1099,7 @@ input:focus {background-color: #FAFFAD ;}
 }
 
 table.mijnAccount:first-of-type {
-    margin-top: 8em; 
+ 
 }
 
 .mijnAccount, .mijnAccount tr, .mijnAccount td {
@@ -1015,8 +1189,8 @@ table.mijnAccount:first-of-type {
 
 
 
-/*********** desktopke ***********//* lg (large)=@media screen and (min-width:799px) */
-@media screen and (min-width:799px) {
+/*********** desktopke ***********//* lg (large)=@media screen and (min-width:933px) */
+@media screen and (min-width:933px) {
 
     /**** responsive switches ***/
     .xs_on {display: none;}
@@ -1040,9 +1214,401 @@ table.mijnAccount:first-of-type {
     .kol-lg-10 {width: 83.33%;}
     .kol-lg-11 {width: 91.66%;}
     .kol-lg-12 {width: 100%;}  
+ i.xs_on.sm_on.fa.fa-barcode.fa-3x.redyellow {
+        display: none;
+    }    
+    
+    span#logoLP.redpetrol.xs_on.sm_on {
+        display: none;
+    }
+    
+#redirect {
+    width: 100vmin; 
+    margin: 2em auto;
+    vertical-align: central; 
+}
 
+#redirect img {
+    width: 40vmin;
+    vertical-align: central; 
+    float: left; 
+}
+
+#linkspijl {  
+    display: inline-block;  
+    border-right: 3vmin solid #7F9799; 
+    border-top: 3vmin solid transparent; 
+    border-bottom: 3vmin solid transparent;
+    width: 0;
+    height: 0;
+    vertical-align: central; 
+    float: left; 
+    margin-top: 45vh; 
+}
+
+#redirect article {
+    display: inline-block; 
+    width: 50vmin;
+    vertical-align: central;
+    background-color: #7F9799; 
+    padding: 1em; 
+    float: left; 
+    margin-top: 15vh; 
+    min-height: 50vh; 
+}
+/****** einde redirect ******/
+/****** start landig page *****/
+a.LP {
+    display: block;
+    text-decoration: none;
+    width: 100vw; 
+    height: 74px;   
+}
+
+span.fixed {
+    display: inline-block;  
+    font-family: detourdork, sans-serif; 
+    font-size: 25px; 
+    margin-top: 25px; 
+    margin-bottom: 1em;
+}
+
+header.midden, footer.midden {
+    text-align: center;
+}
+
+footer.midden {
+    font-size: 4vw;
+}
+
+header {
+    display: block; 
+    position: fixed; 
+    top: 0; 
+    width: 100vw; 
+    height: 74px;    
+    background-color: #7F9799; 
+    font-family: ddork; 
+    z-index: 50; 
+}
+
+#topPijl {
+    position: fixed; 
+    top: 74px;
+    left: calc(50% - 20px);  
+    right: calc(50% - 20px);  
+    border-top: 20px solid #7F9799; 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent;
+    width: 0;
+    height: 0;
+    z-index: 50; 
 
 }
+
+#logoLP {
+    display: block; 
+    position: fixed; 
+    margin: 0; 
+    top: 120px; 
+    bottom: auto; 
+    left: 10%;
+    right: 10%; 
+    font-family: woodcutterbarcode; 
+    font-size: 10vw; 
+
+}
+
+#logo {
+    display: inline-block;   
+    margin-top: 0.5em;
+    margin-left: 0.5em; 
+    height: 4em; 
+    width: 40vw; 
+    overflow: hidden; 
+    position: relative; 
+}
+
+#logo span {
+    font-family: woodcutterbarcode; 
+    font-size: 10em;
+    bottom: 0; 
+    position: absolute; 
+}
+
+#broodlift {
+
+    height: 100vh;  
+    text-align: center; 
+    display: block; 
+    /*    background-image: url("../img/automaat3.jpg"); 
+        background-repeat: no-repeat; 
+        background-position: center; 
+        background-size: 75%; */
+
+/*    background-image: url("../img/backgroundBreadv4.jpg");
+    background-size: 100%;*/
+}
+
+#automaat {
+    margin: 94px auto;
+
+    
+}
+
+
+#sloganLP {
+    display: block; 
+    position: fixed; 
+    bottom: 100px; 
+    left: 10%; 
+    right: 10%; 
+    font-family: detourdork; 
+    font-size: 3em; 
+
+}
+
+#slogan { 
+    float: left; 
+    font-family: detourdork; 
+    font-size: 2em; 
+    margin-top: calc(5em/2 - 1.55em); 
+    margin-left: 0.5em; 
+}
+
+
+#bodemPijl {
+    position: fixed; 
+    bottom: 74px;
+    left: calc(50% - 20px); 
+    right: calc(50% - 20px);      
+    border-bottom: 20px solid #7F9799; 
+    border-left: 20px solid transparent; 
+    border-right: 20px solid transparent;
+    width: 0;
+    height: 0;
+}
+
+footer {
+    display: block; 
+    position: fixed; 
+    bottom: 0; 
+    width: 100vw; 
+    height: 74px; 
+    background-color: #7F9799;
+}
+
+#orderButton {
+    float: right;
+    display: block; 
+    height: 74px; 
+    width: 45vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center;
+    z-index: 50; 
+}
+
+#orderButton div {
+    display: inline-block; 
+    margin-top: calc(5em/2 - 1em);
+}
+#orderButton a {
+    display: inline;
+    
+    
+}
+
+
+#infoButton {
+    float: right;
+    display: block; 
+    height: 74px; 
+    width: 45vw; 
+    font-family: detourdork, sans-serif; 
+    font-size: 1.5em;
+    border-left: 2px solid white; 
+    text-decoration: none; 
+    text-align: center; 
+}
+
+#infoButton span {
+    display: inline-block; 
+    margin-top: calc(5em/2 - 1.25em); 
+}
+
+input:focus {background-color: #FAFFAD ;}
+
+#login { 
+    text-align: right;
+}
+
+#login input {
+    width: 10em;
+    text-align: center;
+    padding: 0.2em 0.5em; 
+}
+
+#login input[type="submit"] {
+    border-radius: 0.2em; 
+    border: 1px outset #3B5450 ;
+    background-color: #E30304;
+    color: #FAFFAD;
+    font-weight: bold;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#nieuw {
+    /*    border: 1px solid black;*/
+    display: block;
+    float: right; 
+    width: 40vw;
+    margin: 0 auto;
+    color: #585858; 
+}
+
+#nieuw h1 {
+    margin-top: 0;
+    text-align: center; 
+}
+
+#nieuw input, #nieuw select {
+    display: block;
+    margin: 1em auto;
+    width: 30em;
+    text-align: center;
+    padding: 0.5em;
+    color: #585858;
+}
+
+#nieuw input[type="submit"] {
+    border-radius: 0.2em; 
+    border: 1px outset #533E29;
+    background-color: #7F9799;
+    width: 31em;
+    font-weight: bold;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+#nieuw select option:first-child{opacity: 0.7; color: red;}
+
+#vitrine {
+    display: block;
+    margin: 0 auto;
+
+}
+
+#loginmsg {
+    color: #FAFFAD; 
+    float: left;    
+    font-family: sans-serif;
+    font-size: 1em; 
+}
+
+#Regmsg {
+    color: #E30304; 
+    float: left;
+    width: 40vw; 
+    text-align: center;   
+    font-family: sans-serif;
+    font-size: 1em; 
+}
+
+table.mijnAccount:first-of-type {
+ 
+}
+
+.mijnAccount, .mijnAccount tr, .mijnAccount td {
+    border-collapse: separate; 
+    border: 1px solid black; 
+}
+
+
+.mijnAccount td {padding: 0.5em 2em;}
+.mijnAccount tr td:first-child {width: 30vw;}
+.mijnAccount tfoot td {text-align: right;}
+
+.mijnAccount {
+    margin: 2em auto; 
+    width: 80vw; 
+}
+
+.mijnAccount form input, .mijnAccount form select {
+    display: block;
+    width: 100%;
+    margin: 0.5em 0; 
+}
+
+.mijnAccount form input:last-of-type {
+    float: right; 
+    width: 40%;
+}
+
+.centerBox {
+    width: 80vw;
+    margin: 8em auto; 
+    position: relative; 
+    cursor: default; 
+}
+.boxRij {
+    display: block; 
+    width: 100%;
+    border: 1px solid black; 
+}
+.product {
+    display: inline-block; 
+    width: 50%; 
+}
+.prijs, 
+.hoeveelheid {
+    display: inline-block; 
+    width: 20%; 
+}
+
+.product, 
+.prijs,
+.hoeveelheid {
+/*    border: 1px solid black;*/
+    margin: 0; 
+    padding: 0.5em 2em; 
+}
+
+#zeecontainer {
+    margin:0; 
+    position:relative;    
+}
+
+.kolom {
+    position:relative; 
+    float:left; 
+    width:31%;   /* 31% = 3 kolommen */
+    margin:5em 1%;  
+    padding:0.5em; 
+}
+
+.achtergrond {
+    position:absolute;
+    width:100%;
+    height:100%;
+
+}
+
+.achtergrond .kolom {
+    height: 100%;
+    background-color:#7F9799 ; 
+}
+
+.wis {
+    clear: both;
+}
+}
+
+
+
 
 /*********** desktop ***********//* xl (extra large)=@media screen and (min-width:1001px) */
 @media screen and (min-width:1001px) {
@@ -1100,6 +1666,22 @@ table.mijnAccount:first-of-type {
     .kol-xxl-12 {width: 100%;}
 
 
+}
+
+.bestelbon {
+    display: block;
+    border: 1px solid black; 
+    padding: 1em;
+    background-color: white;
+    margin: 0 auto; 
+}
+
+.bestelbon tfoot td {
+    border: 1px solid black;
+    border-collapse: separate;
+}
+.bestelbon table tfoot td {
+    background-color: white;
 }
 
 /**@media print {}**/

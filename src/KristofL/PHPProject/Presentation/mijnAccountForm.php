@@ -3,6 +3,7 @@
 
 namespace KristofL\PHPProject\Presentation;
 ?>
+<div class="centerfold breadground">
 <table class="mijnAccount">
     <thead>
         <tr>
